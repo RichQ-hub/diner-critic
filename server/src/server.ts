@@ -27,7 +27,7 @@ app.use(express.json());
 // Server Routes
 // --------------------------------------------------------------------------------
 
-app.use("/restaurants", restaurants);
+app.use("/api/v1/restaurants", restaurants);
 
 // --------------------------------------------------------------------------------
 // Server Listen

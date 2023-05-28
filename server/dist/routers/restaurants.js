@@ -27,19 +27,49 @@ router.get('/', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
         });
     }
     catch (error) {
-        alert(error);
+        console.log(error);
     }
 }));
 router.post('/', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const result = yield (0, restaurants_1.restaurants_create)(req.body.name, req.body.location, req.body.price_range);
+        const name = req.body.name;
+        const location = req.body.restaurant;
+        const price_range = req.body.price_range;
+        const result = yield (0, restaurants_1.restaurants_create)(name, location, price_range);
         res.json({
             status: 'success',
             data: result,
         });
     }
     catch (error) {
-        alert(error);
+        console.log(error);
+    }
+}));
+router.put('/', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const restaurant_id = req.body.restaurant_id;
+        const name = req.body.name;
+        const location = req.body.location;
+        const price_range = req.body.price_range;
+        res.json({
+            status: "success",
+            data: yield (0, restaurants_1.restaurants_edit)(restaurant_id, name, location, price_range)
+        });
+    }
+    catch (error) {
+        console.log(error);
+    }
+}));
+router.delete('/', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const restaurant_id = req.body.restaurant_id;
+        res.json({
+            status: "success",
+            data: yield (0, restaurants_1.restaurants_delete)(restaurant_id)
+        });
+    }
+    catch (error) {
+        console.log(error);
     }
 }));
 exports.default = router;

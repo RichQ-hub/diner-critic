@@ -15,6 +15,9 @@ export async function restaurants_list() {
     }
 }
 
+/**
+ * Creates a new restaurant.
+ */
 export async function restaurants_create(name: string, location: string, price_range: number) {
     const result = await db.query(`
         INSERT INTO Restaurants (name, location, price_range)
@@ -30,4 +33,38 @@ export async function restaurants_create(name: string, location: string, price_r
         location: newRestaurant.location,
         price_range: newRestaurant.price_range,
     }
+}
+
+/**
+ * Updates an existing restaurant.
+ */
+export async function restaurants_edit(
+    restaurant_id: number, 
+    name: string, 
+    location: string, 
+    price_range: number
+) {
+    await db.query(`
+        UPDATE Restaurants
+        SET name = $1,
+            location = $2,
+            price_range = $3
+        WHERE id = $4
+        ;
+    `, [name, location, price_range, restaurant_id]);
+
+    return {}
+}
+
+/**
+ * Deletes an existing restaurant.
+ */
+export async function restaurants_delete(restaurant_id: number) {
+    await db.query(`
+        DELETE FROM Restaurants
+        WHERE id = $1
+        ;
+    `, [restaurant_id]);
+
+    return {}
 }

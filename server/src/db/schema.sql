@@ -16,7 +16,7 @@ CREATE TABLE Restaurants (
 
 CREATE TABLE Users (
     id SERIAL,
-    email EmailString NOT NULL,
+    email EmailString UNIQUE NOT NULL,
     password VARCHAR(16) NOT NULL,
     name_first VARCHAR(64) NOT NULL,
     gender GenderType,

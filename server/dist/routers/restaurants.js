@@ -33,7 +33,7 @@ router.get('/', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
 router.post('/', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const name = req.body.name;
-        const location = req.body.restaurant;
+        const location = req.body.location;
         const price_range = req.body.price_range;
         const result = yield (0, restaurants_1.restaurants_create)(name, location, price_range);
         res.json({

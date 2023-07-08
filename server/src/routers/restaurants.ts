@@ -10,7 +10,6 @@ import {
 
 const router = express.Router();
 
-
 router.get('/', async (req: Request, res: Response) => {
     try {   
         const result = await restaurants_list();
@@ -29,7 +28,7 @@ router.get('/', async (req: Request, res: Response) => {
 router.post('/', async (req: Request, res: Response) => {
     try {
         const name = req.body.name;
-        const location = req.body.restaurant;
+        const location = req.body.location;
         const price_range = req.body.price_range;
 
         const result = await restaurants_create(name, location, price_range);

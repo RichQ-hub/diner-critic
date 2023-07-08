@@ -6,6 +6,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
 const dotenv_1 = __importDefault(require("dotenv"));
 const path_1 = __importDefault(require("path"));
+const cors_1 = __importDefault(require("cors"));
 const restaurants_1 = __importDefault(require("./routers/restaurants"));
 // Need to specify the direct path to the .env file.
 dotenv_1.default.config({ path: path_1.default.resolve(__dirname, '../.env') });
@@ -17,6 +18,7 @@ const app = (0, express_1.default)();
 // --------------------------------------------------------------------------------
 // Middleware
 // --------------------------------------------------------------------------------
+app.use((0, cors_1.default)());
 /**
  * Parses the incoming JSON request into the body of the req object. Can access
  * the data in req.body attribute, which is now a javascript object.

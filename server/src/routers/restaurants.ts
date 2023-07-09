@@ -43,14 +43,19 @@ router.post('/', async (req: Request, res: Response) => {
 
 router.put('/', async (req: Request, res: Response) => {
     try {
-        const restaurant_id = req.body.restaurant_id;
-        const name = req.body.name;
-        const location = req.body.location;
-        const price_range = req.body.price_range;
+        const { 
+            restaurant_id, 
+            name, 
+            location, 
+            price_range 
+        } = req.body;
+        
+        const newRestaurant = await restaurants_edit(restaurant_id, name, location, price_range);
+
 
         res.json({
             status: "success",
-            data: await restaurants_edit(restaurant_id, name, location, price_range)
+            data: newRestaurant
         });
     } catch (error) {
         console.log(error);

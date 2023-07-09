@@ -44,14 +44,20 @@ export async function restaurants_edit(
     location: string, 
     price_range: number
 ) {
-    await db.query(`
+    const result = await db.query(`
         UPDATE Restaurants
         SET name = $1,
             location = $2,
             price_range = $3
         WHERE id = $4
-        ;
+        RETURNING *;
     `, [name, location, price_range, restaurant_id]);
+
+    if (result.rowCount === 0) {
+
+    }
+
+
 
     return {}
 }

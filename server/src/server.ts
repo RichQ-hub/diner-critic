@@ -2,6 +2,7 @@ import express, { Express } from 'express';
 import dotenv from 'dotenv';
 import path from 'path';
 import cors from 'cors';
+import morgan from 'morgan';
 import restaurants from './routers/restaurants';
 
 // Need to specify the direct path to the .env file.
@@ -29,6 +30,12 @@ const app: Express = express();
  * from any origin except your frontend website. 
  */
 app.use(cors());
+
+/**
+ * Morgan allows us to log useful information regarding incoming requests into
+ * the terminal.
+ */
+app.use(morgan("dev"))
 
 /**
  * Parses the incoming JSON request into the body of the req object. Can access

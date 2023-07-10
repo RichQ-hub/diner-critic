@@ -53,13 +53,12 @@ export async function restaurants_edit(
         RETURNING *;
     `, [name, location, price_range, restaurant_id]);
 
-    if (result.rowCount === 0) {
+    // If the restaurant didn't exist, then we would've returned
+    // nothing.
 
+    return {
+        
     }
-
-
-
-    return {}
 }
 
 /**

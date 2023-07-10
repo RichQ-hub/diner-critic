@@ -3,7 +3,10 @@ import dotenv from 'dotenv';
 import path from 'path';
 import cors from 'cors';
 import morgan from 'morgan';
+
+// Routers.
 import restaurants from './routers/restaurants';
+import auth from './routers/auth';
 
 // Need to specify the direct path to the .env file.
 dotenv.config({ path: path.resolve(__dirname, '../.env') });
@@ -47,7 +50,9 @@ app.use(express.json());
 // Server Routes
 // --------------------------------------------------------------------------------
 
-app.use("/api/v1/restaurants", restaurants);
+const rootRoute = '/api/v1';
+app.use(`${rootRoute}/restaurants`, restaurants);
+app.use(`${rootRoute}/auth`, auth);
 
 // --------------------------------------------------------------------------------
 // Server Listen

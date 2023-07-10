@@ -58,7 +58,46 @@ export async function register(req: Request, res: Response) {
 }
 
 export async function login(req: Request, res: Response) {
+    try {
+        const {
+            email,
+            password
+        } = req.body;
 
+        // Check if the user is registered.
+        const resultUser = await db.query(`
+            SELECT *
+            FROM Users
+            WHERE email = $1;
+        `, [email]);
+
+        if (resultUser.rows.length === 0) {
+            return res
+            .status(401)
+            .send({ message: `User with email \'${email}\' does not exist.` });
+        }
+
+        const user = resultUser.rows[0];
+
+        // Hash the incoming password, and compare it with the hashed password
+        // stored in the database.
+        const validPassword = await bcrypt.compare(password, user.password);
+
+        if (!validPassword) {
+            return res
+            .status(401)
+            .send({ message: 'Password incorrect.' });
+        }
+
+        // Generate a new token.
+        const token = generateToken(user.user_id, user.email);
+        res.json({ token });
+
+    } catch (error) {
+        res.status(500).send({ 
+            message: error 
+        });
+    }
 }
 
 /**

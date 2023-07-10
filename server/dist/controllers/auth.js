@@ -59,6 +59,37 @@ function register(req, res) {
 exports.register = register;
 function login(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
+        try {
+            const { email, password } = req.body;
+            // Check if the user is registered.
+            const resultUser = yield db_1.default.query(`
+            SELECT *
+            FROM Users
+            WHERE email = $1;
+        `, [email]);
+            if (resultUser.rows.length === 0) {
+                return res
+                    .status(401)
+                    .send({ message: `User with email \'${email}\' does not exist.` });
+            }
+            const user = resultUser.rows[0];
+            // Hash the incoming password, and compare it with the hashed password
+            // stored in the database.
+            const validPassword = yield bcrypt_1.default.compare(password, user.password);
+            if (!validPassword) {
+                return res
+                    .status(401)
+                    .send({ message: 'Password incorrect.' });
+            }
+            // Generate a new token.
+            const token = (0, jwtGenerator_1.default)(user.user_id, user.email);
+            res.json({ token });
+        }
+        catch (error) {
+            res.status(500).send({
+                message: error
+            });
+        }
     });
 }
 exports.login = login;

@@ -47,13 +47,11 @@ router.post('/', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
 }));
 router.put('/', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const restaurant_id = req.body.restaurant_id;
-        const name = req.body.name;
-        const location = req.body.location;
-        const price_range = req.body.price_range;
+        const { restaurant_id, name, location, price_range } = req.body;
+        const newRestaurant = yield (0, restaurants_1.restaurants_edit)(restaurant_id, name, location, price_range);
         res.json({
             status: "success",
-            data: yield (0, restaurants_1.restaurants_edit)(restaurant_id, name, location, price_range)
+            data: newRestaurant
         });
     }
     catch (error) {

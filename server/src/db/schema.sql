@@ -1,6 +1,14 @@
+-- Initialise database tables.
+-- Run via: \i {absolute_path_to_sql_file}
+--      Sample: \i C:/Users/rrqui/OneDrive/Desktop/Projects/yelp-clone-v2/server/src/db/schema.sql
+
+-- Note: PostgreSQL Shell does this weird thing where the path uses '/' instead of 
+-- the normal '\'.
+
+--------------------------------------------------------------------------------------------------
 
 -- Ensures email matches the specified regex pattern.
-CREATE DOMAIN EmailString AS VARCHAR(64) CHECK (VALUE ~ '^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$');
+CREATE DOMAIN EmailString AS VARCHAR(64) CHECK (VALUE ~ '^([\w\.\-]+)@([\w\-]+)((\.(\w){2,3})+)$');
 CREATE DOMAIN GenderType AS CHAR(1) CHECK (VALUE IN ('M', 'F'));
 
 CREATE TABLE Restaurants (
@@ -17,10 +25,10 @@ CREATE TABLE Restaurants (
 CREATE TABLE Users (
     id SERIAL,
     email EmailString UNIQUE NOT NULL,
-    password VARCHAR(16) NOT NULL,
+    password VARCHAR(255) NOT NULL, -- We store the encrypted password.
     name_first VARCHAR(64) NOT NULL,
     gender GenderType,
-    birthday DATE NOT NULL,
+    birth_date DATE NOT NULL, -- Stored as a string in the format 'yyyy-mm-dd'
 
     PRIMARY KEY (id)
 );

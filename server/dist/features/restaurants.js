@@ -55,14 +55,16 @@ exports.restaurants_create = restaurants_create;
  */
 function restaurants_edit(restaurant_id, name, location, price_range) {
     return __awaiter(this, void 0, void 0, function* () {
-        yield db_1.default.query(`
+        const result = yield db_1.default.query(`
         UPDATE Restaurants
         SET name = $1,
             location = $2,
             price_range = $3
         WHERE id = $4
-        ;
+        RETURNING *;
     `, [name, location, price_range, restaurant_id]);
+        // If the restaurant didn't exist, then we would've returned
+        // nothing.
         return {};
     });
 }

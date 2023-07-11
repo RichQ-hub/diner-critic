@@ -1,14 +1,51 @@
-import express, { Request, Response } from 'express';
-import db from '../db';
+import express, { Request, Response, NextFunction } from 'express';
+import jwt from 'jsonwebtoken';
+
+interface TokenInterface {
+    user_id: string,
+    email: string
+}
 
 /**
  * Verifies that the incoming request has a valid token in order to check if 
  * the user is "AUTHORISED" (not "AUTHENTICATE"), i.e. that the user is 
  * allowed to access a specific route.
  */
-export default async function authorize() {
+async function authorize(req: Request, res: Response, next: NextFunction) {
+    try {
+        // Incoming token will be stored in the header of the request object.
+        const token = req.header('token');
 
+        // If no token was found in the header, not authorized.
+        if (!token) {
+            return res
+            .status(403)
+            .send({ message: 'No token found. Authorization denied.' });
+        }
+
+        // Decode the token and extract the payload.
+        const payload = jwt.verify(token, process.env.JWT_SECRET as string) as TokenInterface;
+
+        // If the signature does not match the payload in the given token, then the 
+        // token has been modified and is thus invalid.
+        if (!payload.user_id) {
+            return res
+            .status(403)
+            .send({ message: 'Token veritifcation failed. Authorization denied.' });
+        }
+
+        // Add the user email into the request object to be passed onto the next function.
+        req.user = payload.email;
+
+        // Call next function since this is middleware.
+        next();
+
+    } catch (error) {
+        res.status(500).send({ message: error });
+    }
 }
+
+export default authorize;
 
 /**
  * NOTES: Purpose of JWT Tokens.

@@ -5,7 +5,7 @@ import jwt from 'jsonwebtoken';
 export default function generateToken(user_id: string, email: string) {
     const payload = {
         user_id,
-        email
+        email,
     }
 
     return jwt.sign(payload, process.env.JWT_SECRET as string, {

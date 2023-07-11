@@ -1,78 +1,20 @@
 import express, { Request, Response } from 'express';
 
-// Features.
+// Controllers.
 import { 
-    restaurants_list, 
-    restaurants_create,
-    restaurants_edit,
-    restaurants_delete
-} from '../features/restaurants';
+    getRestaurants,
+    getOneRestaurant,
+    createRestaurant,
+    editRestaurant,
+    deleteRestaurant
+} from '../controllers/restaurants';
 
 const router = express.Router();
 
-router.get('/', async (req: Request, res: Response) => {
-    try {   
-        const result = await restaurants_list();
-
-        res.json({
-            status: 'success',
-            data: {
-                restaurants: result.restaurants,
-            }
-        })
-    } catch (error) {
-        console.log(error);
-    }
-});
-
-router.post('/', async (req: Request, res: Response) => {
-    try {
-        const name = req.body.name;
-        const location = req.body.location;
-        const price_range = req.body.price_range;
-
-        const result = await restaurants_create(name, location, price_range);
-        res.json({
-            status: 'success',
-            data: result,
-        })
-    } catch (error) {
-        console.log(error);
-    }
-});
-
-router.put('/', async (req: Request, res: Response) => {
-    try {
-        const { 
-            restaurant_id, 
-            name, 
-            location, 
-            price_range 
-        } = req.body;
-        
-        const newRestaurant = await restaurants_edit(restaurant_id, name, location, price_range);
-
-
-        res.json({
-            status: "success",
-            data: newRestaurant
-        });
-    } catch (error) {
-        console.log(error);
-    }
-});
-
-router.delete('/', async (req: Request, res: Response) => {
-    try {
-        const restaurant_id = req.body.restaurant_id;
-
-        res.json({
-            status: "success",
-            data: await restaurants_delete(restaurant_id)
-        })
-    } catch (error) {
-        console.log(error);
-    }
-})
+router.get('/', getRestaurants);
+router.get('/:restaurantId', getOneRestaurant);
+router.post('/', createRestaurant);
+router.put('/:restaurantId', editRestaurant);
+router.delete('/:restaurantId', deleteRestaurant)
 
 export default router;

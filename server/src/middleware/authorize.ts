@@ -1,4 +1,4 @@
-import express, { Request, Response, NextFunction } from 'express';
+import { Request, Response, NextFunction } from 'express';
 import jwt from 'jsonwebtoken';
 
 interface TokenInterface {
@@ -8,7 +8,7 @@ interface TokenInterface {
 
 /**
  * Verifies that the incoming request has a valid token in order to check if 
- * the user is "AUTHORISED" (not "AUTHENTICATE"), i.e. that the user is 
+ * the user is "AUTHORISED" (not "AUTHENTICATED"), i.e. that the user is 
  * allowed to access a specific route.
  */
 async function authorize(req: Request, res: Response, next: NextFunction) {
@@ -31,7 +31,7 @@ async function authorize(req: Request, res: Response, next: NextFunction) {
         if (!payload.user_id) {
             return res
             .status(403)
-            .send({ message: 'Token veritifcation failed. Authorization denied.' });
+            .send({ message: 'Token verification failed. Authorization denied.' });
         }
 
         // Add the user email into the request object to be passed onto the next function.

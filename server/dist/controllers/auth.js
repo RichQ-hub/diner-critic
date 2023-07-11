@@ -12,7 +12,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.login = exports.register = void 0;
+exports.verifyToken = exports.login = exports.register = void 0;
 const bcrypt_1 = __importDefault(require("bcrypt"));
 const jwtGenerator_1 = __importDefault(require("../utils/jwtGenerator"));
 const db_1 = __importDefault(require("../db"));
@@ -46,7 +46,7 @@ function register(req, res) {
         `, [name_first, email, passwordHash, gender, birth_date]);
             const newUser = resultUser.rows[0];
             // Generate our JWT token and return it to the user's client.
-            const token = (0, jwtGenerator_1.default)(newUser.user_id, newUser.email);
+            const token = (0, jwtGenerator_1.default)(newUser.id, newUser.email);
             res.json({ token });
         }
         catch (error) {
@@ -82,7 +82,7 @@ function login(req, res) {
                     .send({ message: 'Password incorrect.' });
             }
             // Generate a new token.
-            const token = (0, jwtGenerator_1.default)(user.user_id, user.email);
+            const token = (0, jwtGenerator_1.default)(user.id, user.email);
             res.json({ token });
         }
         catch (error) {
@@ -93,6 +93,26 @@ function login(req, res) {
     });
 }
 exports.login = login;
+/**
+ * Verifies a token every time a React app refreshes (due to changing state).
+ */
+function verifyToken(req, res) {
+    return __awaiter(this, void 0, void 0, function* () {
+        try {
+            // The authorize middleware function runs before this, and should
+            // throw an error if the token is not valid. Hence, if we made it to this
+            // function, that immediately means that the user is authorized (the
+            // token is valid). So we can just return true.
+            res.json(true);
+        }
+        catch (error) {
+            res.status(500).send({
+                message: error
+            });
+        }
+    });
+}
+exports.verifyToken = verifyToken;
 /**
  * STATUS CODES:
  * 401 - Means user is 'Unauthenticated'.

@@ -8,7 +8,7 @@ const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
 function generateToken(user_id, email) {
     const payload = {
         user_id,
-        email
+        email,
     };
     return jsonwebtoken_1.default.sign(payload, process.env.JWT_SECRET, {
         expiresIn: "600s"

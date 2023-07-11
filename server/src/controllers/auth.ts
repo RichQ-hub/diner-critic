@@ -47,7 +47,7 @@ export async function register(req: Request, res: Response) {
         const newUser = resultUser.rows[0];
     
         // Generate our JWT token and return it to the user's client.
-        const token = generateToken(newUser.user_id, newUser.email);
+        const token = generateToken(newUser.id, newUser.email);
         res.json({ token });
 
     } catch (error) {
@@ -90,9 +90,28 @@ export async function login(req: Request, res: Response) {
         }
 
         // Generate a new token.
-        const token = generateToken(user.user_id, user.email);
+        const token = generateToken(user.id, user.email);
         res.json({ token });
 
+    } catch (error) {
+        res.status(500).send({ 
+            message: error 
+        });
+    }
+}
+
+
+/**
+ * Verifies a token every time a React app refreshes (due to changing state).
+ */
+export async function verifyToken(req: Request, res: Response) {
+    try {
+        // The authorize middleware function runs before this, and should
+        // throw an error if the token is not valid. Hence, if we made it to this
+        // function, that immediately means that the user is authorized (the
+        // token is valid). So we can just return true.
+        res.json(true);
+        
     } catch (error) {
         res.status(500).send({ 
             message: error 

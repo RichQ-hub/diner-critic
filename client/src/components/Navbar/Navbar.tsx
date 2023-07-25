@@ -21,9 +21,9 @@ export default function Navbar() {
 
         window.addEventListener("scroll", handleNavScroll);
 
-        return (
-            window.removeEventListener("scroll", handleNavScroll)
-        )
+        return () => {
+            window.removeEventListener("scroll", handleNavScroll);
+        }
 
         /**
          * How this works:

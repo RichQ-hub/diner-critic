@@ -1,10 +1,8 @@
-import React from 'react'
-import { Outlet } from 'react-router-dom'
 
 export default function RestaurantFinder() {
     return (
-        <>
+        <main>
             <div>RestaurantFinder</div>
-        </>
+        </main>
     )
 }

@@ -1,10 +1,99 @@
 .nav {
-    /* position: fixed; */
-    width: 100%;
-    height: 200px;
-    border: 3px solid green;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 80px;
+    /* Margin of auto on left and right automatically centers the element inside its container. */
+    margin: 40px auto 0;
+    max-width: 1200px;
+    z-index: 2;
+    background: #050E1B;
+    box-shadow: 0px 5px 3px 0px rgba(0, 0, 0, 0.80);
+    
+    display: flex;
+    align-items: center;
+
+    transition: all 0.35s cubic-bezier(.24,1,.31,1) 0s;
 }
 
 .nav--sticky {
-    border: 3px solid red;
+    max-width: 100%;
+    margin-top: 0;
+    height: 50px;
+}
+
+.nav__logo-wrapper {
+    position: relative;
+    
+    width: 9.5rem;
+    height: calc(inherit + 10%);
+    border-radius: 1.25rem;
+    background: #3A1114;
+    box-shadow: 7px 7px 4px 0px #0F0E27;
+}
+
+.nav__logo-large {
+    width: 100%;
+    height: 100%;
+}
+
+.nav__logo-small {
+    margin: 0 2rem;
+    height: 80%;
+}
+
+.nav__links {
+    display: flex;
+    height: 100%;
+    margin-left: 1.5rem;
+}
+
+.nav__links a {
+    position: relative;
+    padding: 0 15px;
+    font-family: Rajdhani, sans-serif;
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: var(--color-orange);
+    display: flex;
+    align-items: center;
+}
+
+.nav__links a:after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background-color: var(--color-orange);
+    transform: scale(0);
+    transition: all 0.3s ease-in;
+}
+
+.nav__links a:hover {
+    color: white;
+}
+
+.nav__links a:hover:after {
+    transform: scale(1);
+}
+
+
+.nav__login {
+    height: 100%;
+    width: 8rem;
+    margin-left: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #116386;
+}
+
+.nav__login p {
+    font-family: Rajdhani;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: white;
 }

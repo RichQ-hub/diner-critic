@@ -73,6 +73,9 @@
     font-weight: 500;
 }
 
+.hero-desc__text-box__link:hover {
+    opacity: 80%;
+}
 
 
 .socials {

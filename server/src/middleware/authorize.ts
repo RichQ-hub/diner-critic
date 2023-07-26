@@ -23,7 +23,8 @@ async function authorize(req: Request, res: Response, next: NextFunction) {
             .send({ message: 'No token found. Authorization denied.' });
         }
 
-        // Decode the token and extract the payload.
+        // Verifies the token by comparing signautres. If successful, extract the payload section
+        // of the token.
         const payload = jwt.verify(token, process.env.JWT_SECRET as string) as TokenInterface;
 
         // If the signature does not match the payload in the given token, then the 

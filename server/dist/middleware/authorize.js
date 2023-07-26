@@ -29,7 +29,8 @@ function authorize(req, res, next) {
                     .status(403)
                     .send({ message: 'No token found. Authorization denied.' });
             }
-            // Decode the token and extract the payload.
+            // Verifies the token by comparing signautres. If successful, extract the payload section
+            // of the token.
             const payload = jsonwebtoken_1.default.verify(token, process.env.JWT_SECRET);
             // If the signature does not match the payload in the given token, then the 
             // token has been modified and is thus invalid.

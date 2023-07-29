@@ -59,5 +59,5 @@ app.use(`${rootRoute}/auth`, auth);
 // --------------------------------------------------------------------------------
 
 app.listen(port, () => {
-  console.log(`⚡️[Server]: Server is running at http://localhost:${port}/`);
+    console.log(`⚡️[Server]: Server is running at http://localhost:${port}/`);
 });

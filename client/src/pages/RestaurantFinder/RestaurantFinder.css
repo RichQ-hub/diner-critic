@@ -1,0 +1,76 @@
+
+.rest-page {
+    position: relative;
+    height: calc(100vh + 40px);
+
+    background-image: url(../../assets/images/resto-page-bg.png);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.rest-finder {
+    position: fixed;
+    border: 2px solid blue;
+    
+    top: 160px;
+    right: 0;
+    left: 0;
+    bottom: 20px;
+
+    margin: 0 3%;
+
+    display: grid;
+    grid-template-columns: clamp(200px, 20%, 260px) 1fr;
+    grid-template-rows: 100%;
+    transition: all 0.35s cubic-bezier(.24,1,.31,1) 0s;
+}
+
+.rest-finder--scrolled {
+    top: 80px;
+}
+
+.rest-filters {
+    border: 1px solid red;
+    margin-top: 64px;
+}
+
+.rest-right {
+    border: 2px solid purple;
+    display: flex;
+    flex-direction: column;
+}
+
+.rest-right h1 {
+    font-family: Rajdhani;
+    font-size: 3rem;
+    font-weight: 700;
+    color: var(--color-orange);
+}
+
+.rest-list {
+    padding: 1rem;
+    height: 100%;
+    overflow-y: scroll;
+    overflow-x: hidden;
+
+    /* Prevent parent from scrolling. */
+    overscroll-behavior: contain;
+
+    /* Layout all the restaurant cards */
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+/* Restaurant list scrollbar styles. */
+
+.rest-list::-webkit-scrollbar {
+    width: 0.6rem;
+}
+
+.rest-list::-webkit-scrollbar-thumb {
+    background-color: darkgrey;
+    outline: 1px solid slategrey;
+    border-radius: 100px;
+}

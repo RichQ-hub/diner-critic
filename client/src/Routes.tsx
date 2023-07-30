@@ -23,7 +23,7 @@ export default function Routes() {
             ]
         },
         {
-            path: 'restaurants',
+            path: '/restaurants',
             element: <NavbarLayout />,
             // NOTE: If we added <RestaurantFinder> component as an element here, it would've been 
             // used as a layout page, where we would use <Outlet> to render its children.

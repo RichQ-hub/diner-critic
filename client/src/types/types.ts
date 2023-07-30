@@ -2,5 +2,7 @@ export interface Restaurant {
     id: string;
     name: string;
     location: string;
-    priceRange: number;
+    price_range: number;
+    description: string;
+    img: string;
 }

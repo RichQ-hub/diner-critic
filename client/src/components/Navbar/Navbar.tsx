@@ -17,7 +17,7 @@ const NAV_LINKS: Navlink[] = [
     },
     {
         name: "Restaurants",
-        href: "restaurants"
+        href: "/restaurants"
     }
 ]
 

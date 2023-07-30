@@ -1,5 +1,6 @@
 import Navbar from '../components/Navbar'
 import { Outlet } from 'react-router-dom'
+import ScrollToTop from './ScrollToTop'
 
 /**
  * This layout wraps around all the pages except the error page, since we don't want
@@ -9,6 +10,7 @@ export default function NavbarLayout() {
     return (
         <>
             <Navbar />
+            <ScrollToTop />
             <Outlet />
         </>
     )

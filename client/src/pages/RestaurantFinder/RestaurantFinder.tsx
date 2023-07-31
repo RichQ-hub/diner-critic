@@ -5,6 +5,7 @@ import RestaurantsService from "../../services/RestaurantsService";
 
 import './RestaurantFinder.css';
 import RestaurantCard from "../../components/RestaurantCard/RestaurantCard";
+import FilterAside from "../../components/FilterAside/FilterAside";
 
 export default function RestaurantFinder() {
     const { restaurantsList, setRestaurantsList } = useContext(RestaurantsListContext);
@@ -39,9 +40,7 @@ export default function RestaurantFinder() {
         <main className="rest-page">
             <section className={`rest-finder ${isScrolled ? 'rest-finder--scrolled' : ''}`}>
                 {/* Filter section */}
-                <aside className="rest-filters">
-                    <h2>Filters</h2>
-                </aside>
+                <FilterAside />
 
                 <div className="rest-right">
                     {/* Page Title */}

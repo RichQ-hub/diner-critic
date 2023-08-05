@@ -3,6 +3,6 @@ export interface Restaurant {
     name: string;
     location: string;
     price_range: number;
-    description: string;
-    img: string;
+    description_short: string;
+    img_filename: string;
 }

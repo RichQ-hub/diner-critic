@@ -11,15 +11,21 @@ export default function RestaurantFinder() {
     const { restaurantsList, setRestaurantsList } = useContext(RestaurantsListContext);
     const [isScrolled, setIsScrolled] = useState<boolean>(false);
 
+    /**
+     * Fetches restaurant data when this page component mounts.
+     */
     useEffect(() => {
-        // async function fetchData() {
-        //     const data = await RestaurantsService.getRestaurants();
-        //     setRestaurantsList(data.restaurants);
-        // }
-        // fetchData();
-        setRestaurantsList(restaurantsData); // Use this for now for styling.
+        async function fetchData() {
+            const data = await RestaurantsService.getRestaurants();
+            setRestaurantsList(data.restaurants);
+        }
+        fetchData();
+        // setRestaurantsList(restaurantsData); // Use this test data for now for styling.
     }, [])
 
+    /**
+     * Attatches window scroll event to detect when the page is not scrolled down.
+     */
     useEffect(() => {
         function handlePageScroll() {
             if (window.scrollY > 0) {
@@ -49,7 +55,7 @@ export default function RestaurantFinder() {
                     {/* Restaurants List Section */}
                     <div className="rest-list">
                         {restaurantsList.map((restaurant) => {
-                            const { id, name, location, price_range, description, img } = restaurant;
+                            const { id, name, location, price_range, description_short, img_filename } = restaurant;
                             return (
                                 <RestaurantCard 
                                     key={id}
@@ -57,8 +63,8 @@ export default function RestaurantFinder() {
                                     name={name}
                                     location={location}
                                     price_range={price_range}
-                                    description={description}
-                                    img={img}
+                                    description_short={description_short}
+                                    img_filename={img_filename}
                                 />
                             )
                         })}

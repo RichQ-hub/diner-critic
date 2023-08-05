@@ -1,13 +1,14 @@
 import { Link } from "react-router-dom";
 import "./RestaurantCard.css";
+import { useEffect, useState } from "react";
 
 interface RestaurantCardProps {
     id: string;
     name: string;
     location: string;
     price_range: number;
-    description: string;
-    img: string;
+    description_short: string;
+    img_filename: string;
 }
 
 export default function RestaurantCard(props: RestaurantCardProps) {
@@ -16,18 +17,39 @@ export default function RestaurantCard(props: RestaurantCardProps) {
         name, 
         location, 
         price_range, 
-        description, 
-        img 
+        description_short, 
+        img_filename, 
     } = props;
+
+    const [imgRef, setImgRef] = useState<string>("");
+
+    /**
+     * Loads the restaurant img dynamically using dynamic import syntax.
+     */
+    useEffect(() => {
+        async function getImageImport() {
+            /**
+             * NOTE: We store restaurant images in the client assets folder, since we cannot use
+             * the dynamic import() function to import images outside of the client/src
+             * folder.
+             */
+            const img = await import(`../../assets/storage/restaurants/${img_filename}`);
+            
+            // The import() function returns a Module object, and to actual link to
+            // the image is stored in the "default" property.
+            setImgRef(img.default);
+        };
+        getImageImport();
+    }, []);
 
     return (
         <Link className="rest-card" to={`${id}`}>
             <div className="rest-card__img-wrapper">
-                <img className="rest-card__img" src={img} alt="" />
+                <img className="rest-card__img" src={imgRef} alt="" />
             </div>
             <div className="rest-card__content">
                 <h2 className="rest-card__name">{name}</h2>
-                <p className="rest-card__desc">{description}</p>
+                <p className="rest-card__desc">{description_short}</p>
             </div>
             <div className="rest-card__tags">
                 {/* Note: Could probably make a tag component. */}

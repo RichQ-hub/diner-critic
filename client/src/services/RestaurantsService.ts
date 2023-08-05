@@ -24,7 +24,7 @@ class RestaurantsService {
 
     async createRestaurant(payload: RestaurantPayload) {
         const response = await RestaurantsAPI.post("/", payload);
-        return response.data();
+        return response.data;
     }
 
     async editRestaurant(restaurantId: string, payload: RestaurantPayload) {

@@ -1,4 +1,5 @@
 import express from 'express';
+import upload from '../middleware/multerStorage';
 
 // Controllers.
 import { 
@@ -13,8 +14,8 @@ const router = express.Router();
 
 router.get('/', getRestaurants);
 router.get('/:restaurantId', getOneRestaurant);
-router.post('/', createRestaurant);
-router.put('/:restaurantId', editRestaurant);
+router.post('/', upload.single("image"), createRestaurant);
+router.put('/:restaurantId', upload.single("image"), editRestaurant);
 router.delete('/:restaurantId', deleteRestaurant)
 
 export default router;

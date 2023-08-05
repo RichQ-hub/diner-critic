@@ -1,6 +1,6 @@
 -- Initialise database tables.
 -- Run via: \i {absolute_path_to_sql_file}
---      Sample: \i C:/Users/rrqui/OneDrive/Desktop/Projects/yelp-clone-v2/server/src/db/schema.sql
+--      Sample: \i C:/Users/rrqui/OneDrive/Desktop/Projects/diner-critic/server/src/db/schema.sql
 
 -- Note: PostgreSQL Shell does this weird thing where the path uses '/' instead of 
 -- the normal '\'.
@@ -19,7 +19,7 @@ CREATE TABLE Restaurants (
         CHECK (price_range BETWEEN 0 and 5),
     description_short VARCHAR(150), -- Short description displayed on the restaurant card in the finder.
     description_long TEXT, -- Description displayed on the review page.
-    img_href TEXT, -- Stores the main image local reference link.
+    img_href TEXT NOT NULL, -- Stores the main image local reference link.
 
     PRIMARY KEY (id)
 );

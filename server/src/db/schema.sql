@@ -19,7 +19,7 @@ CREATE TABLE Restaurants (
         CHECK (price_range BETWEEN 0 and 5),
     description_short VARCHAR(150), -- Short description displayed on the restaurant card in the finder.
     description_long TEXT, -- Description displayed on the review page.
-    img_href TEXT NOT NULL, -- Stores the main image local reference link.
+    img_filename TEXT NOT NULL, -- Stores the main image local reference link.
 
     PRIMARY KEY (id)
 );

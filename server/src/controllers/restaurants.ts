@@ -63,7 +63,7 @@ export async function createRestaurant(req: Request, res: Response) {
 
         // Multer middleware automatically gives us access to the file property in the req object.
         // It contains all the info about the uploaded file.
-        const fileLocation = `storage/${req.file?.filename}`;
+        const fileLocation = req.file?.filename;
 
         // If there was no file uploaded, then we send back an error.
         if (!req.file?.filename) {
@@ -75,7 +75,7 @@ export async function createRestaurant(req: Request, res: Response) {
         console.log(fileLocation)
 
         const result = await db.query(`
-            INSERT INTO Restaurants (name, location, price_range, description_short, description_long, img_href)
+            INSERT INTO Restaurants (name, location, price_range, description_short, description_long, img_filename)
             VALUES ($1, $2, $3, $4, $5, $6)
             RETURNING *;
         `, [name, location, price_range, description_short, description_long, fileLocation]);
@@ -115,7 +115,7 @@ export async function editRestaurant(req: Request, res: Response) {
             description_long
         } = req.body;
 
-        const fileLocation = `storage/${req.file?.filename}`;
+        const fileLocation = req.file?.filename;
 
         // If there was no file uploaded, then we send back an error.
         if (!req.file?.filename) {
@@ -131,7 +131,7 @@ export async function editRestaurant(req: Request, res: Response) {
                 price_range = $3,
                 description_short = $4,
                 description_long = $5,
-                img_ref = $6
+                img_filename = $6
             WHERE id = $7
             RETURNING *;
         `, [name, location, price_range, description_short, description_long, fileLocation, restaurantId]);

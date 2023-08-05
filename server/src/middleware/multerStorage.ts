@@ -2,8 +2,7 @@ import multer from "multer";
 
 const fileStorageEngine = multer.diskStorage({
     destination: (req, file, cb) => {
-        // We store uploaded files in the public folder.
-        cb(null, "../storage");
+        cb(null, "../client/src/assets/storage/restaurants");
     },
     filename: (req, file, cb) => {
         cb(null, Date.now() + "-" + file.originalname);
@@ -13,6 +12,13 @@ const fileStorageEngine = multer.diskStorage({
 const upload = multer({ storage: fileStorageEngine });
 
 export default upload;
+
+/**
+ * IMPORTANT NOTE:
+ * We store restaurant images in the client assets folder, since we cannot use
+ * the dynamic import() function to import images outside of the client/src
+ * folder.
+ */
 
 /**
  * REFERENCES:

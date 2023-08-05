@@ -6,8 +6,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const multer_1 = __importDefault(require("multer"));
 const fileStorageEngine = multer_1.default.diskStorage({
     destination: (req, file, cb) => {
-        // We store uploaded files in the public folder.
-        cb(null, "../storage");
+        cb(null, "../client/src/assets/storage/restaurants");
     },
     filename: (req, file, cb) => {
         cb(null, Date.now() + "-" + file.originalname);
@@ -15,6 +14,12 @@ const fileStorageEngine = multer_1.default.diskStorage({
 });
 const upload = (0, multer_1.default)({ storage: fileStorageEngine });
 exports.default = upload;
+/**
+ * IMPORTANT NOTE:
+ * We store restaurant images in the client assets folder, since we cannot use
+ * the dynamic import() function to import images outside of the client/src
+ * folder.
+ */
 /**
  * REFERENCES:
  * - https://www.youtube.com/watch?v=EVOFt8Its6I

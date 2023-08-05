@@ -8,7 +8,6 @@ const dotenv_1 = __importDefault(require("dotenv"));
 const path_1 = __importDefault(require("path"));
 const cors_1 = __importDefault(require("cors"));
 const morgan_1 = __importDefault(require("morgan"));
-const multerStorage_1 = __importDefault(require("./middleware/multerStorage"));
 // Routers.
 const restaurants_1 = __importDefault(require("./routers/restaurants"));
 const auth_1 = __importDefault(require("./routers/auth"));
@@ -49,11 +48,6 @@ app.use(express_1.default.json());
 const rootRoute = '/api/v1';
 app.use(`${rootRoute}/restaurants`, restaurants_1.default);
 app.use(`${rootRoute}/auth`, auth_1.default);
-// TEST ROUTE FOR UPLOADING FILES.
-app.post(`${rootRoute}/upload`, multerStorage_1.default.single("image"), (req, res) => {
-    console.log(req.file);
-    res.send("Upload single file success.");
-});
 // --------------------------------------------------------------------------------
 // Server Listen
 // --------------------------------------------------------------------------------

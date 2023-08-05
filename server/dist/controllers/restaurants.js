@@ -62,6 +62,10 @@ function getOneRestaurant(req, res) {
 exports.getOneRestaurant = getOneRestaurant;
 /**
  * Creates a single new restaurant.
+ *
+ * POSTMAN NOTE: For us to be able to send a image file along with the JSON body, we have to
+ * use the form-data option under the Body section when sending data to create a restaurant.
+ * See how it's done on postman.
  */
 function createRestaurant(req, res) {
     var _a, _b;
@@ -70,7 +74,7 @@ function createRestaurant(req, res) {
             const { name, location, price_range, description_short, description_long, } = req.body;
             // Multer middleware automatically gives us access to the file property in the req object.
             // It contains all the info about the uploaded file.
-            const fileLocation = `storage/${(_a = req.file) === null || _a === void 0 ? void 0 : _a.filename}`;
+            const fileLocation = (_a = req.file) === null || _a === void 0 ? void 0 : _a.filename;
             // If there was no file uploaded, then we send back an error.
             if (!((_b = req.file) === null || _b === void 0 ? void 0 : _b.filename)) {
                 return res
@@ -79,7 +83,7 @@ function createRestaurant(req, res) {
             }
             console.log(fileLocation);
             const result = yield db_1.default.query(`
-            INSERT INTO Restaurants (name, location, price_range, description_short, description_long, img_href)
+            INSERT INTO Restaurants (name, location, price_range, description_short, description_long, img_filename)
             VALUES ($1, $2, $3, $4, $5, $6)
             RETURNING *;
         `, [name, location, price_range, description_short, description_long, fileLocation]);
@@ -100,6 +104,10 @@ function createRestaurant(req, res) {
 exports.createRestaurant = createRestaurant;
 /**
  * Updates the details of a single restaurant.
+ *
+ * POSTMAN NOTE: For us to be able to send a image file along with the JSON body, we have to
+ * use the form-data option under the Body section when sending data to create a restaurant.
+ * See how it's done on postman.
  */
 function editRestaurant(req, res) {
     var _a, _b;
@@ -109,7 +117,7 @@ function editRestaurant(req, res) {
             // We pass in the restaurant attirbutes we want to change as part
             // of the request.
             const { name, location, price_range, description_short, description_long } = req.body;
-            const fileLocation = `storage/${(_a = req.file) === null || _a === void 0 ? void 0 : _a.filename}`;
+            const fileLocation = (_a = req.file) === null || _a === void 0 ? void 0 : _a.filename;
             // If there was no file uploaded, then we send back an error.
             if (!((_b = req.file) === null || _b === void 0 ? void 0 : _b.filename)) {
                 return res
@@ -123,7 +131,7 @@ function editRestaurant(req, res) {
                 price_range = $3,
                 description_short = $4,
                 description_long = $5,
-                img_ref = $6
+                img_filename = $6
             WHERE id = $7
             RETURNING *;
         `, [name, location, price_range, description_short, description_long, fileLocation, restaurantId]);

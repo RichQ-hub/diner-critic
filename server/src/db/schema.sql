@@ -17,7 +17,9 @@ CREATE TABLE Restaurants (
     location VARCHAR(50) NOT NULL,
     price_range INTEGER NOT NULL
         CHECK (price_range BETWEEN 0 and 5),
-    -- opened DATE NOT NULL,
+    description_short VARCHAR(150), -- Short description displayed on the restaurant card in the finder.
+    description_long TEXT, -- Description displayed on the review page.
+    img_href TEXT, -- Stores the main image local reference link.
 
     PRIMARY KEY (id)
 );
@@ -47,15 +49,5 @@ CREATE TABLE Reviews (
     FOREIGN KEY (restaurant) REFERENCES Restaurants(id)
 );
 
--- DUMMY TABLE (FOR TESTING)
--- CREATE TABLE oks (
---     id SERIAL,
---     name VARCHAR(30),
---     PRIMARY KEY (id)
--- );
-
--- INSERT INTO oks (name) 
--- VALUES
---     ('mike'),
---     ('jacob'),
---     ('harry');
+-- MOCK DATA GENERATOR
+--      https://www.mockaroo.com/

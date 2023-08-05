@@ -3,7 +3,7 @@ import multer from "multer";
 const fileStorageEngine = multer.diskStorage({
     destination: (req, file, cb) => {
         // We store uploaded files in the public folder.
-        cb(null, "../imgStorage");
+        cb(null, "../storage");
     },
     filename: (req, file, cb) => {
         cb(null, Date.now() + "-" + file.originalname);

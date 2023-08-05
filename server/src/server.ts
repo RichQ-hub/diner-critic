@@ -4,8 +4,6 @@ import path from 'path';
 import cors from 'cors';
 import morgan from 'morgan';
 
-import upload from './middleware/multerStorage';
-
 // Routers.
 import restaurants from './routers/restaurants';
 import auth from './routers/auth';
@@ -55,12 +53,6 @@ app.use(express.json());
 const rootRoute = '/api/v1';
 app.use(`${rootRoute}/restaurants`, restaurants);
 app.use(`${rootRoute}/auth`, auth);
-
-// TEST ROUTE FOR UPLOADING FILES.
-app.post(`${rootRoute}/upload`, upload.single("image"), (req, res) => {
-    console.log(req.file);
-    res.send("Upload single file success.");
-})
 
 // --------------------------------------------------------------------------------
 // Server Listen

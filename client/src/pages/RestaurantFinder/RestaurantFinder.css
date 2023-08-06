@@ -32,9 +32,11 @@
 .rest-right {
     display: flex;
     flex-direction: column;
+    padding: 0 1rem;
 }
 
 .rest-right h1 {
+    margin-left: 1rem;
     font-family: Rajdhani;
     font-size: 3rem;
     font-weight: 700;

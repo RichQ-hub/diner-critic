@@ -6,6 +6,7 @@ import RestaurantsService from "../../services/RestaurantsService";
 import './RestaurantFinder.css';
 import RestaurantCard from "../../components/RestaurantCard/RestaurantCard";
 import FilterAside from "../../components/FilterAside/FilterAside";
+import RestaurantSearchToolbar from "../../components/RestaurantSearchHeading/RestaurantSearchToolbar";
 
 export default function RestaurantFinder() {
     const { restaurantsList, setRestaurantsList } = useContext(RestaurantsListContext);
@@ -15,12 +16,12 @@ export default function RestaurantFinder() {
      * Fetches restaurant data when this page component mounts.
      */
     useEffect(() => {
-        async function fetchData() {
-            const data = await RestaurantsService.getRestaurants();
-            setRestaurantsList(data.restaurants);
-        }
-        fetchData();
-        // setRestaurantsList(restaurantsData); // Use this test data for now for styling.
+        // async function fetchData() {
+        //     const data = await RestaurantsService.getRestaurants();
+        //     setRestaurantsList(data.restaurants);
+        // }
+        // fetchData();
+        setRestaurantsList(restaurantsData); // Use this test data for now for styling.
     }, [])
 
     /**
@@ -51,6 +52,8 @@ export default function RestaurantFinder() {
                 <div className="rest-right">
                     {/* Page Title */}
                     <h1>Restaurants</h1>
+
+                    <RestaurantSearchToolbar />
 
                     {/* Restaurants List Section */}
                     <div className="rest-list">

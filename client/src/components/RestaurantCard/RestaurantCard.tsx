@@ -26,26 +26,31 @@ export default function RestaurantCard(props: RestaurantCardProps) {
     /**
      * Loads the restaurant img dynamically using dynamic import syntax.
      */
-    useEffect(() => {
-        async function getImageImport() {
-            /**
-             * NOTE: We store restaurant images in the client assets folder, since we cannot use
-             * the dynamic import() function to import images outside of the client/src
-             * folder.
-             */
-            const img = await import(`../../assets/storage/restaurants/${img_filename}`);
+    // useEffect(() => {
+    //     async function getImageImport() {
+    //         /**
+    //          * NOTE: We store restaurant images in the client assets folder, since we cannot use
+    //          * the dynamic import() function to import images outside of the client/src
+    //          * folder.
+    //          */
+    //         const img = await import(`../../assets/storage/restaurants/${img_filename}`);
             
-            // The import() function returns a Module object, and to actual link to
-            // the image is stored in the "default" property.
-            setImgRef(img.default);
-        };
-        getImageImport();
-    }, []);
+    //         // The import() function returns a Module object, and to actual link to
+    //         // the image is stored in the "default" property.
+    //         setImgRef(img.default);
+    //     };
+    //     getImageImport();
+    // }, []);
 
     return (
-        <Link className="rest-card" to={`${id}`}>
+        /**
+         * NOTE:
+         * This link navigates to a sibling route by going back up to the parent with '../', 
+         * and then accesses the individual restaurant page.
+         */
+        <Link className="rest-card" to={`../${id}`}>
             <div className="rest-card__img-wrapper">
-                <img className="rest-card__img" src={imgRef} alt="" />
+                <img className="rest-card__img" src={img_filename} alt="" />
             </div>
             <div className="rest-card__content">
                 <h2 className="rest-card__name">{name}</h2>

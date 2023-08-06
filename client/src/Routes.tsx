@@ -1,10 +1,11 @@
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { createBrowserRouter, Navigate, RouterProvider } from "react-router-dom";
 import HomePage from "./pages/HomePage";
 import ErrorPage from "./pages/ErrorPage";
 import RestaurantFinder from "./pages/RestaurantFinder";
 import RestaurantPage from "./pages/RestaurantPage";
 import UpdateRestaurantPage from "./pages/UpdateRestaurantPage/UpdateRestaurantPage";
 import NavbarLayout from "./layouts/NavbarLayout";
+import CreateRestaurantPage from "./pages/CreateRestaurantPage";
 
 /**
  * Utilising React Router v6.14.
@@ -31,7 +32,18 @@ export default function Routes() {
                 // This is our index page for when we just visit /restaurants without any children.
                 {
                     index: true,
+                    // Here we immediately redirect to the search page when accessing the root 
+                    // index '/restaurants' route. So essentially, the '/restaurants/search' route
+                    // is basically the index route.
+                    element: <Navigate to="search"/>,
+                },
+                {
+                    path: 'search',
                     element: <RestaurantFinder />,
+                },
+                {
+                    path: 'create',
+                    element: <CreateRestaurantPage />,
                 },
                 {
                     path: ':restaurantId',

@@ -13,7 +13,7 @@ export const restaurantsData: Restaurant[] = [
         description_short: `Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
         Vestibulum dictum metus vitae tempus maximus. Duis hendrerit turpis vel 
         rutrum venenatis. Integer sit amet pellentesque metus.`,
-        img_filename: "cafe-diner.gif",
+        img_filename: cafeDinerImg,
     },
     {
         id: "2",
@@ -23,7 +23,7 @@ export const restaurantsData: Restaurant[] = [
         description_short: `Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
         Vestibulum dictum metus vitae tempus maximus. Duis hendrerit turpis vel 
         rutrum venenatis. Integer sit amet pellentesque metus.`,
-        img_filename: "bake-shop.gif",
+        img_filename: bakeShopImg,
     },
     {
         id: "3",
@@ -33,7 +33,7 @@ export const restaurantsData: Restaurant[] = [
         description_short: `Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
         Vestibulum dictum metus vitae tempus maximus. Duis hendrerit turpis vel 
         rutrum venenatis. Integer sit amet pellentesque metus.`,
-        img_filename: "burger-joint.gif",
+        img_filename: burgerJointImg,
     },
     {
         id: "4",
@@ -43,6 +43,6 @@ export const restaurantsData: Restaurant[] = [
         description_short: `Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
         Vestibulum dictum metus vitae tempus maximus. Duis hendrerit turpis vel 
         rutrum venenatis. Integer sit amet pellentesque metus.`,
-        img_filename: "cyber-foods.gif",
+        img_filename: cyberFoodsImg,
     },
 ]

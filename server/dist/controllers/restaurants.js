@@ -79,7 +79,7 @@ function searchRestaurants(req, res) {
             WHERE name ~* $1;
         `, [nameRegexp]);
             res.json({
-                restaurant: matchedRestaurants.rows,
+                restaurants: matchedRestaurants.rows,
             });
         }
         catch (error) {

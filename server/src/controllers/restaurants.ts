@@ -66,7 +66,7 @@ export async function searchRestaurants(req: Request, res: Response) {
         `, [nameRegexp]);
 
         res.json({
-            restaurant: matchedRestaurants.rows,
+            restaurants: matchedRestaurants.rows,
         });
         
     } catch (error) {

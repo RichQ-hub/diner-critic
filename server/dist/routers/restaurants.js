@@ -9,8 +9,13 @@ const multerStorage_1 = __importDefault(require("../middleware/multerStorage"));
 const restaurants_1 = require("../controllers/restaurants");
 const router = express_1.default.Router();
 router.get('/', restaurants_1.getRestaurants);
+// We sepecify this get route above '/:restaurantId', so that if we were to access the route '/restaurants/search' 
+// we don't set the value of the route param ':restaurantId' to 'search', which is invalid since there
+// are no restaurants with an id of 'search'. So essentially, we pattern match this route '/search' first.
+router.get('/search', restaurants_1.searchRestaurants);
 router.get('/:restaurantId', restaurants_1.getOneRestaurant);
 router.post('/', multerStorage_1.default.single("image"), restaurants_1.createRestaurant);
 router.put('/:restaurantId', multerStorage_1.default.single("image"), restaurants_1.editRestaurant);
 router.delete('/:restaurantId', restaurants_1.deleteRestaurant);
+// test 
 exports.default = router;

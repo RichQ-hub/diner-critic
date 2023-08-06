@@ -22,7 +22,7 @@ export async function getRestaurants(req: Request, res: Response) {
 }
 
 /**
- * Obtains a single restaurant by the given id from the req params.
+ * Obtains all the information about a single restaurant by the given id from the req params.
  */
 export async function getOneRestaurant(req: Request, res: Response) {
     try {
@@ -34,9 +34,41 @@ export async function getOneRestaurant(req: Request, res: Response) {
             WHERE id = $1;
         `, [restaurantId]);
 
+        if (restaurant.rows.length === 0) {
+            return res
+            .status(404)
+            .send({ message: 'Restaurant does not exist.' });
+        }
+
         res.json({
             restaurant: restaurant.rows[0],
         });
+    } catch (error) {
+        res.status(500).send({ 
+            message: error 
+        });
+    }
+}
+
+export async function searchRestaurants(req: Request, res: Response) {
+    try {
+        const { query } = req.query;
+
+        // Pattern matches all restaurants that start with the search query in their name,
+        // using case-insensitive matching. (COULD MAYBE LATER PATTERN MATCH ANYWHERE ON THE STRING
+        // NOT JUST THE START).
+        const nameRegexp = `^${query}.*`
+        
+        const matchedRestaurants = await db.query(`
+            SELECT *
+            FROM Restaurants
+            WHERE name ~* $1;
+        `, [nameRegexp]);
+
+        res.json({
+            restaurant: matchedRestaurants.rows,
+        });
+        
     } catch (error) {
         res.status(500).send({ 
             message: error 
@@ -63,14 +95,14 @@ export async function createRestaurant(req: Request, res: Response) {
 
         // Multer middleware automatically gives us access to the file property in the req object.
         // It contains all the info about the uploaded file.
-        const fileLocation = req.file?.filename;
+        const fileLocation = req.file?.filename || "";
 
-        // If there was no file uploaded, then we send back an error.
-        if (!req.file?.filename) {
-            return res
-            .status(404)
-            .send({ message: 'No image uploaded' });
-        }
+        // If there was no file uploaded, then we send back an error. (FOR NOW WE CAN UPLOAD NO FILES)
+        // if (!req.file?.filename) {
+        //     return res
+        //     .status(404)
+        //     .send({ message: 'No image uploaded' });
+        // }
 
         console.log(fileLocation)
 
@@ -79,8 +111,6 @@ export async function createRestaurant(req: Request, res: Response) {
             VALUES ($1, $2, $3, $4, $5, $6)
             RETURNING *;
         `, [name, location, price_range, description_short, description_long, fileLocation]);
-
-        console.log("nope")
 
         // Return the details of the newly created restaurant.
         const newRestaurant = result.rows[0];
@@ -115,14 +145,14 @@ export async function editRestaurant(req: Request, res: Response) {
             description_long
         } = req.body;
 
-        const fileLocation = req.file?.filename;
+        const fileLocation = req.file?.filename || "";
 
-        // If there was no file uploaded, then we send back an error.
-        if (!req.file?.filename) {
-            return res
-            .status(404)
-            .send({ message: 'No image uploaded' });
-        }
+        // If there was no file uploaded, then we send back an error. (FOR NOW WE CAN UPLOAD NO FILES)
+        // if (!req.file?.filename) {
+        //     return res
+        //     .status(404)
+        //     .send({ message: 'No image uploaded' });
+        // }
 
         const result = await db.query(`
             UPDATE Restaurants

@@ -22,6 +22,11 @@ class RestaurantsService {
         return response.data;
     }
 
+    async searchRestaurants(searchQuery: string) {
+        const response = await RestaurantsAPI.get(`/search?query=${searchQuery}`);
+        return response.data;
+    }
+
     async createRestaurant(payload: RestaurantPayload) {
         const response = await RestaurantsAPI.post("/", payload);
         return response.data;

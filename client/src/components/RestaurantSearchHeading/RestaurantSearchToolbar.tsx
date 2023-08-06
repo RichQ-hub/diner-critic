@@ -1,6 +1,7 @@
 import { Link, useSearchParams } from "react-router-dom";
 import React, { useContext } from "react";
 import { RestaurantsListContext } from "../../context/RestaurantsListContextProvider";
+import RestaurantsService from "../../services/RestaurantsService";
 
 import "./RestaurantSearchToolbar.css";
 
@@ -8,8 +9,14 @@ export default function RestaurantSearchToolbar() {
     const [searchParams, setSearchParams] = useSearchParams();
     const { restaurantsList, setRestaurantsList } = useContext(RestaurantsListContext);
 
-    function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+    /**
+     * Handles search query, setting the restaurants list to all the restaurants that
+     * match the user input's search query.
+     */
+    async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
         e.preventDefault();
+        const data = await RestaurantsService.searchRestaurants(searchParams.get("query") as string);
+        setRestaurantsList(data.restaurants);
     }
 
     function handleChangeSearchQuery(e: React.FormEvent<HTMLInputElement>) {

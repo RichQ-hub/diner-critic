@@ -16,12 +16,12 @@ export default function RestaurantFinder() {
      * Fetches restaurant data when this page component mounts.
      */
     useEffect(() => {
-        async function fetchData() {
-            const data = await RestaurantsService.getRestaurants();
-            setRestaurantsList(data.restaurants);
-        }
-        fetchData();
-        // setRestaurantsList(restaurantsData); // Use this test data for now for styling.
+        // async function fetchData() {
+        //     const data = await RestaurantsService.getRestaurants();
+        //     setRestaurantsList(data.restaurants);
+        // }
+        // fetchData();
+        setRestaurantsList(restaurantsData); // Use this test data for now for styling.
     }, [])
 
     /**

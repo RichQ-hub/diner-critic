@@ -1,9 +1,9 @@
 .rest-toolbar {
-    padding-left: 1rem;
+    padding: 0 1rem;
     display: flex;
     align-items: stretch;
-    margin-bottom: 0.5rem;
-    height: 50px;
+    margin-bottom: 0.8rem;
+    height: 40px;
     width: auto;
 }
 
@@ -84,8 +84,4 @@
     font-size: 1rem;
     font-weight: 700;
     line-height: 1.75rem;
-}
-
-.rest-add-restaurant svg {
-
 }

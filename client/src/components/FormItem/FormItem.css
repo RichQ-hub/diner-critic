@@ -1,0 +1,9 @@
+.create-rest-form-item h2 {
+    display: block;
+    color: white;
+    font-family: Rajdhani;
+    font-size: 1.5rem;
+    font-weight: 700;
+    line-height: 1.6rem;
+    margin-bottom: 0.4rem;
+}

@@ -11,7 +11,7 @@ export default function FormItemText(props: FormItemTextProps) {
     return (
         <FormItem title={title}>
             <input 
-                className='create-rest-form-input' 
+                className='input--bg' 
                 type="text" 
             />
         </FormItem>

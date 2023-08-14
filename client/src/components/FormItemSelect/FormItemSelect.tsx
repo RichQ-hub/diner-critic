@@ -1,7 +1,31 @@
-import React from 'react'
+import { useState } from 'react'
+import FormItem from '../FormItem/FormItem';
+import SelectDropdown from './SelectDropdown';
 
-export default function FormItemSelect() {
+interface FormItemSelectProps {
+    title: string;
+
+}
+
+export default function FormItemSelect(props: FormItemSelectProps) {
+    const { title } = props;
+
+    const [isSelectOpen, setIsSelectOpen] = useState<boolean>(false);
+
+    function handleSelectOpen() {
+        setIsSelectOpen(!isSelectOpen);
+    }
+
     return (
-        <div>FormItemSelect</div>
+        <FormItem title={title}>
+            <button className='create-form-select input--bg' >
+                
+            </button>
+
+            {
+                isSelectOpen && 
+                <SelectDropdown />
+            }
+        </FormItem>
     )
 }

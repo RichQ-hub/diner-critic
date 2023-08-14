@@ -1,7 +1,15 @@
 import { useNavigate } from "react-router-dom";
 import "./CreateRestaurantPage.css";
+import { useState } from "react";
 
 export default function CreateRestaurantPage() {
+    const [name, setName] = useState<string>("");
+    const [location, setLocation] = useState<string>("")
+    const [priceRange, setPriceRange] = useState<number | null>(null);
+    const [shortDesc, setShortDesc] = useState<string>("")
+    const [longDesc, setLongDesc] = useState<string>("")
+    const [imgUpload, setImgUpload] = useState<string | null>(null);
+
     const navigate = useNavigate();
 
     function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
@@ -9,6 +17,10 @@ export default function CreateRestaurantPage() {
 
         // Redirect back to the search page.
         navigate("/restaurants");
+    }
+    
+    function handleChangePriceRange(value: number) {
+        setPriceRange(value);
     }
 
     return (

@@ -1,0 +1,28 @@
+import React from 'react'
+
+interface PriceRangeDropdownItemProps {
+    value: number;
+    handleChangePriceRange: (value: number) => void;
+    handleDropdownOpen: () => void;
+}
+
+export default function PriceRangeDropdownItem(props: PriceRangeDropdownItemProps) {
+
+    const { 
+        value, 
+        handleChangePriceRange, 
+        handleDropdownOpen,
+    } = props;
+
+    return (
+        <div 
+            className=''
+            onClick={() => {
+                handleChangePriceRange(value);
+                handleDropdownOpen();
+            }}
+        >
+            {value}
+        </div>
+    )
+}

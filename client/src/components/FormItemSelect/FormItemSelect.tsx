@@ -1,31 +1,32 @@
 import { useState } from 'react'
 import FormItem from '../FormItem/FormItem';
-import SelectDropdown from './SelectDropdown';
 
 interface FormItemSelectProps {
     title: string;
-
+    selectedItem: string;
+    isDropdownOpen: boolean;
+    handleDropdownOpen: () => void;
+    dropdownMenu: React.ReactNode;
 }
 
 export default function FormItemSelect(props: FormItemSelectProps) {
-    const { title } = props;
-
-    const [isSelectOpen, setIsSelectOpen] = useState<boolean>(false);
-
-    function handleSelectOpen() {
-        setIsSelectOpen(!isSelectOpen);
-    }
+    const { 
+        title, 
+        selectedItem,
+        isDropdownOpen,
+        handleDropdownOpen,
+        dropdownMenu 
+    } = props;
 
     return (
         <FormItem title={title}>
-            <button className='create-form-select input--bg' >
-                
+            <button className='create-form-select input--bg' onClick={handleDropdownOpen}>
+                <p>{selectedItem}</p>
             </button>
 
-            {
-                isSelectOpen && 
-                <SelectDropdown />
-            }
+            {/* This returns the first falsy value, or the last one if all are true. So if 
+            isMenuOpen is true, then we return DropdownMenu component. */}
+            {isDropdownOpen && dropdownMenu}
         </FormItem>
     )
 }

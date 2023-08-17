@@ -20,9 +20,10 @@ export default function FormItemSelect(props: FormItemSelectProps) {
 
     return (
         <FormItem title={title}>
-            <button className='create-form-select input--bg' onClick={handleDropdownOpen}>
+            {/* Button */}
+            <div className='create-form-select input--bg' onClick={handleDropdownOpen}>
                 <p>{selectedItem}</p>
-            </button>
+            </div>
 
             {/* This returns the first falsy value, or the last one if all are true. So if 
             isMenuOpen is true, then we return DropdownMenu component. */}

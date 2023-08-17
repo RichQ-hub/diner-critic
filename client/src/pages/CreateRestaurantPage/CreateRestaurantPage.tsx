@@ -19,6 +19,8 @@ export default function CreateRestaurantPage() {
     function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
         e.preventDefault();
 
+        console.log("nice")
+
         const formData = new FormData();
 
         if (selectedImg) {
@@ -31,7 +33,7 @@ export default function CreateRestaurantPage() {
         formData.append("description_short", shortDesc.value);
         formData.append("desacription_long", longDesc.value);
 
-        RestaurantsService.createRestaurant(formData);
+        // RestaurantsService.createRestaurant(formData);
 
         // Redirect back to the search page.
         navigate("/restaurants");
@@ -51,14 +53,26 @@ export default function CreateRestaurantPage() {
         <main className="rest-page-create">
             <h1 className="create-rest-title">Create A New Restaurant</h1>
             <form className="create-rest-form" action="" onSubmit={handleSubmit}>
-                <FormItemText title="Name" />
-                <FormItemText title="Location" />
+                <FormItemText 
+                    title="Name" 
+                    onChange={name.handleChange} 
+                />
+                <FormItemText 
+                    title="Location" 
+                    onChange={location.handleChange} 
+                />
                 <PriceRangeSelect 
                     selectedItem={priceRange.toString()}
                     handleChangePriceRange={handleChangePriceRange}
                 />
-                <FormItemText title="Short Description (Displayed on Search Page)" />
-                <FormItemText title="Long Description (Displayed on Review Page)" />
+                <FormItemText 
+                    title="Short Description (Displayed on Search Page)" 
+                    onChange={shortDesc.handleChange}
+                />
+                <FormItemText 
+                    title="Long Description (Displayed on Review Page)" 
+                    onChange={longDesc.handleChange}
+                />
 
                 <input type="file" accept="image/*" onChange={handleImgUpload}/>
 

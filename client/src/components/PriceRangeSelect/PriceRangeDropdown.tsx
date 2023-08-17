@@ -18,9 +18,10 @@ export default function PriceRangeDropdown(props: PriceRangeDropdownProps) {
     return (
         <div className='price-dropdown'>
             {/* Creates an array [1,2,3,4,5] */}
-            {[...Array(NUM_ITEMS + 1).keys()].slice(1).map((price: number) => {
+            {[...Array(NUM_ITEMS + 1).keys()].slice(1).map((price: number, idx) => {
                 return (
-                    <PriceRangeDropdownItem 
+                    <PriceRangeDropdownItem
+                        key={idx}
                         value={price}
                         handleChangePriceRange={handleChangePriceRange}
                         handleDropdownOpen={handleDropdownOpen}

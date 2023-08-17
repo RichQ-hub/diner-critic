@@ -1,5 +1,5 @@
 import { Link, useSearchParams } from "react-router-dom";
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { RestaurantsListContext } from "../../context/RestaurantsListContextProvider";
 import RestaurantsService from "../../services/RestaurantsService";
 
@@ -7,7 +7,8 @@ import "./RestaurantSearchToolbar.css";
 
 export default function RestaurantSearchToolbar() {
     const [searchParams, setSearchParams] = useSearchParams();
-    const { restaurantsList, setRestaurantsList } = useContext(RestaurantsListContext);
+    const [searchQuery, setSearchQuery] = useState<string>("");
+    const { setRestaurantsList } = useContext(RestaurantsListContext);
 
     /**
      * Handles search query, setting the restaurants list to all the restaurants that
@@ -15,14 +16,15 @@ export default function RestaurantSearchToolbar() {
      */
     async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
         e.preventDefault();
+        setSearchParams({
+            query: searchQuery,
+        });
         const data = await RestaurantsService.searchRestaurants(searchParams.get("query") as string);
         setRestaurantsList(data.restaurants);
     }
 
     function handleChangeSearchQuery(e: React.FormEvent<HTMLInputElement>) {
-        setSearchParams({
-            query: e.currentTarget.value,
-        });
+        setSearchQuery(e.currentTarget.value);
     }
 
     return (
@@ -33,7 +35,7 @@ export default function RestaurantSearchToolbar() {
                     className="rest-search__bar" 
                     type="text" 
                     placeholder="Search Restaurants"
-                    value={searchParams.get('query') as string}
+                    value={searchQuery}
                     onChange={handleChangeSearchQuery}
                 />
                 <button className="rest-search__button" type="submit">

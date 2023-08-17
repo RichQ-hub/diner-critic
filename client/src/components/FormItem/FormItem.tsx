@@ -9,7 +9,7 @@ export default function FormItem(props: FormItemProps) {
     const { children, title } = props;
 
     return (
-        <div className='create-rest-form-item'>
+        <div className='create-rest-input'>
             <h2>{title}</h2>
             {children}
         </div>

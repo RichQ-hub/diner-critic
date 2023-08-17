@@ -18,7 +18,7 @@
 
 .create-rest-form {
     margin: 0 auto;
-    max-width: 1100px;
+    max-width: 900px;
     display: flex;
     flex-direction: column;
     gap: 2rem;
@@ -37,3 +37,111 @@
     font-family: Rajdhani, sans-serif;
     font-size: 1.2rem;
 }
+
+.input--bg:hover {
+    outline: 1px solid white;
+}
+
+.input--bg:focus-visible {
+    outline: none;
+}
+
+.input--bg:focus, .input--bg.dropdown--open {
+    outline: 2px solid white;
+}
+
+.create-rest-input {
+    position: relative;
+}
+
+.create-rest-input h2 {
+    color: white;
+    font-family: Rajdhani;
+    font-size: 1.4rem;
+    font-weight: 700;
+    line-height: 1.5625rem;
+    margin-bottom: 0.4rem;
+}
+
+/* DROPDOWN SECTION */
+
+.create-rest-select {
+    cursor: pointer;
+    position: relative;
+    z-index: 3;
+}
+
+.create-rest-select p {
+    font-weight: 600;
+}
+
+.price-dropdown {
+    width: 100%;
+    position: absolute;
+    z-index: 2;
+    border-radius: 0.4rem;  
+
+    display: flex;
+    flex-direction: column;
+    background-color: #242526;
+    border: 1px solid #474a4d;
+}
+
+.price-dropdown__item {
+    padding: 0.6rem;
+    color: white;
+    font-family: Rajdhani;
+    font-size: 1.4rem;
+    font-weight: 600;
+    transition: background-color 0.4s;
+}
+
+.price-dropdown__item:hover {
+    background-color: #525357;
+    cursor: pointer;
+}
+
+/* TEXTAREA SECTION */
+
+.create-rest-textarea {
+    min-height: 150px;
+    resize: vertical;
+    overflow-y:hidden;
+}
+
+/* FILE SECTION */
+
+.create-rest-input input[type=file] {
+    display: none;
+}
+
+.create-rest-file {
+    padding: 0.4rem;
+    cursor: pointer;
+    border: none;
+    border-radius: 0.2rem;
+    background: rgba(73, 211, 255, 0.97);
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 30px;
+    transition: transform 0.2s ease-in;
+}
+
+.create-rest-file p {
+    color: black;
+    text-align: center;
+    font-family: Rajdhani;
+    font-size: 1.2rem;
+    font-weight: 700;
+}
+
+.create-rest-file:hover {
+    outline: 2px solid white;
+}
+
+.create-rest-file:active {
+    transform: scale(0.95);
+}
+

@@ -21,7 +21,7 @@ export default function FormItemSelect(props: FormItemSelectProps) {
     return (
         <FormItem title={title}>
             {/* Button */}
-            <div className='create-form-select input--bg' onClick={handleDropdownOpen}>
+            <div className={`create-rest-select input--bg ${isDropdownOpen ? 'dropdown--open' : ''}`} onClick={handleDropdownOpen}>
                 <p>{selectedItem}</p>
             </div>
 

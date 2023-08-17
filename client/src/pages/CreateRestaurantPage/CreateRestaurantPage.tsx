@@ -3,8 +3,10 @@ import "./CreateRestaurantPage.css";
 import { useState } from "react";
 import { useFormInputText } from "../../hooks/useFormInputText";
 import FormItemText from "../../components/FormItemText/FormItemText";
+import FormItemTextarea from "../../components/FormItemTextarea/FormItemTextarea";
 import PriceRangeSelect from "../../components/PriceRangeSelect/PriceRangeSelect";
-import RestaurantsService from "../../services/RestaurantsService"
+import RestaurantsService from "../../services/RestaurantsService";
+import FormItemFile from "../../components/FormItemFile/FormItemFile";
 
 export default function CreateRestaurantPage() {
     const name = useFormInputText();
@@ -43,9 +45,9 @@ export default function CreateRestaurantPage() {
         setPriceRange(value);
     }
 
-    function handleImgUpload(e: React.ChangeEvent<HTMLInputElement>) {
-        if (e.target.files) {
-            setSelectedImg(e.target.files[0]);
+    function handleImgUpload(e: React.FormEvent<HTMLInputElement>) {
+        if (e.currentTarget.files) {
+            setSelectedImg(e.currentTarget.files[0]);
         }
     }
 
@@ -65,16 +67,19 @@ export default function CreateRestaurantPage() {
                     selectedItem={priceRange.toString()}
                     handleChangePriceRange={handleChangePriceRange}
                 />
-                <FormItemText 
+                <FormItemTextarea 
                     title="Short Description (Displayed on Search Page)" 
                     onChange={shortDesc.handleChange}
                 />
-                <FormItemText 
+                <FormItemTextarea 
                     title="Long Description (Displayed on Review Page)" 
                     onChange={longDesc.handleChange}
                 />
 
-                <input type="file" accept="image/*" onChange={handleImgUpload}/>
+                <FormItemFile 
+                    title="Restaurant Image"
+                    onChange={handleImgUpload}
+                /> 
 
                 <button type="submit">Create New Restaurant</button>
             </form>

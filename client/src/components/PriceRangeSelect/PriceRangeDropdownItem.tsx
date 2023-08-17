@@ -16,7 +16,7 @@ export default function PriceRangeDropdownItem(props: PriceRangeDropdownItemProp
 
     return (
         <div 
-            className=''
+            className='price-dropdown__item'
             onClick={() => {
                 handleChangePriceRange(value);
                 handleDropdownOpen();

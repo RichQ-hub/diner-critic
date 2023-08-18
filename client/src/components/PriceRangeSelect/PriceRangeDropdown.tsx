@@ -1,4 +1,3 @@
-import React from 'react'
 import PriceRangeDropdownItem from './PriceRangeDropdownItem';
 
 const NUM_ITEMS = 5;

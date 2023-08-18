@@ -18,7 +18,7 @@ export default function CreateRestaurantPage() {
 
     const navigate = useNavigate();
 
-    function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+    async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
         e.preventDefault();
 
         console.log("nice")
@@ -35,7 +35,7 @@ export default function CreateRestaurantPage() {
         formData.append("description_short", shortDesc.value);
         formData.append("desacription_long", longDesc.value);
 
-        // RestaurantsService.createRestaurant(formData);
+        await RestaurantsService.createRestaurant(formData);
 
         // Redirect back to the search page.
         navigate("/restaurants");

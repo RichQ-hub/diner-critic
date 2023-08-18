@@ -26,21 +26,25 @@ export default function RestaurantCard(props: RestaurantCardProps) {
     /**
      * Loads the restaurant img dynamically using dynamic import syntax.
      */
-    // useEffect(() => {
-    //     async function getImageImport() {
-    //         /**
-    //          * NOTE: We store restaurant images in the client assets folder, since we cannot use
-    //          * the dynamic import() function to import images outside of the client/src
-    //          * folder.
-    //          */
-    //         const img = await import(`../../assets/storage/restaurants/${img_filename}`);
+    useEffect(() => {
+        async function getImageImport() {
+            /**
+             * NOTE: We store restaurant images in the client assets folder, since we cannot use
+             * the dynamic import() function to import images outside of the client/src
+             * folder.
+             */
+            try {
+                const img = await import(`../../assets/storage/${img_filename}`);
+                // The import() function returns a Module object, and the actual link to
+                // the image is stored in the "default" property.
+                setImgRef(img.default);
+            } catch (error) {
+                console.log(error);
+            }
             
-    //         // The import() function returns a Module object, and to actual link to
-    //         // the image is stored in the "default" property.
-    //         setImgRef(img.default);
-    //     };
-    //     getImageImport();
-    // }, []);
+        };
+        getImageImport();
+    }, []);
 
     return (
         /**
@@ -50,7 +54,7 @@ export default function RestaurantCard(props: RestaurantCardProps) {
          */
         <Link className="rest-card" to={`../${id}`}>
             <div className="rest-card__img-wrapper">
-                <img className="rest-card__img" src={img_filename} alt="" />
+                <img className="rest-card__img" src={imgRef} alt="" />
             </div>
             <div className="rest-card__content">
                 <h2 className="rest-card__name">{name}</h2>

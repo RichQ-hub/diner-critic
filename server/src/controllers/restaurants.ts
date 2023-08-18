@@ -104,8 +104,6 @@ export async function createRestaurant(req: Request, res: Response) {
         //     .send({ message: 'No image uploaded' });
         // }
 
-        console.log(fileLocation)
-
         const result = await db.query(`
             INSERT INTO Restaurants (name, location, price_range, description_short, description_long, img_filename)
             VALUES ($1, $2, $3, $4, $5, $6)

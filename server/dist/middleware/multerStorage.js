@@ -6,7 +6,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const multer_1 = __importDefault(require("multer"));
 const fileStorageEngine = multer_1.default.diskStorage({
     destination: (req, file, cb) => {
-        cb(null, "../client/src/assets/storage/restaurants");
+        cb(null, "../client/src/assets/storage");
     },
     filename: (req, file, cb) => {
         cb(null, Date.now() + "-" + file.originalname);

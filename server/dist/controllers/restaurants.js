@@ -111,7 +111,6 @@ function createRestaurant(req, res) {
             //     .status(404)
             //     .send({ message: 'No image uploaded' });
             // }
-            console.log(fileLocation);
             const result = yield db_1.default.query(`
             INSERT INTO Restaurants (name, location, price_range, description_short, description_long, img_filename)
             VALUES ($1, $2, $3, $4, $5, $6)

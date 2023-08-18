@@ -20,6 +20,7 @@ CREATE TABLE Restaurants (
     description_short VARCHAR(150), -- Short description displayed on the restaurant card in the finder.
     description_long TEXT, -- Description displayed on the review page.
     img_filename TEXT NOT NULL, -- Stores the main image local reference link.
+    posted_at TIMESTAMPTZ DEFAULT NOW() 
 
     PRIMARY KEY (id)
 );
@@ -40,9 +41,15 @@ CREATE TABLE Reviews (
     author INTEGER NOT NULL,
     restaurant INTEGER NOT NULL,
     content TEXT,
-    rating INTEGER NOT NULL 
-        CHECK (rating BETWEEN 0 AND 10),
-    created_at DATE,
+    rating_overall INTEGER NOT NULL 
+        CHECK (rating BETWEEN 1 AND 5),
+    rating_food INTEGER NOT NULL 
+        CHECK (rating BETWEEN 1 AND 5),
+    rating_service INTEGER NOT NULL 
+        CHECK (rating BETWEEN 1 AND 5),
+    rating_atmosphere INTEGER NOT NULL 
+        CHECK (rating BETWEEN 1 AND 5),
+    created_at DATE DEFAULT CURRENT_DATE,
 
     PRIMARY KEY (id),
     FOREIGN KEY (author) REFERENCES Users(id),

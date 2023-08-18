@@ -21,8 +21,6 @@ export default function CreateRestaurantPage() {
     async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
         e.preventDefault();
 
-        console.log("nice")
-
         const formData = new FormData();
 
         if (selectedImg) {
@@ -48,6 +46,17 @@ export default function CreateRestaurantPage() {
     function handleImgUpload(e: React.FormEvent<HTMLInputElement>) {
         if (e.currentTarget.files) {
             setSelectedImg(e.currentTarget.files[0]);
+
+            /**
+             * NOTE:
+             * Below line allows us to upload the same file, since onChange event
+             * is not fired when uploading the same file to input=file type.
+             * Hence, we need to set the value so the empty string for the 
+             * event object.
+             * 
+             * Ref: https://stackoverflow.com/questions/4109276/how-to-detect-input-type-file-change-for-the-same-file
+             */
+            e.currentTarget.value = "";
         }
     }
 

@@ -1,11 +1,12 @@
 import { Link, useParams } from 'react-router-dom'
 
+import './RestaurantPage.css';
+
 export default function RestaurantPage() {
     const { restaurantId } = useParams();
     return (
-        <>
-            <div>RestaurantPage {restaurantId}</div>
-            <Link to="/mate">Go back</Link>
-        </>
+        <main className='rest-review-page'>
+
+        </main>
     )
 }

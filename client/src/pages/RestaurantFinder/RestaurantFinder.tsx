@@ -44,7 +44,7 @@ export default function RestaurantFinder() {
     }, [])
 
     return (
-        <main className="rest-page">
+        <main className="rest-search-page">
             <section className={`rest-finder ${isScrolled ? 'rest-finder--scrolled' : ''}`}>
                 {/* Filter section */}
                 <FilterAside />

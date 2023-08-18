@@ -15,10 +15,13 @@ export default function RestaurantSearchToolbar() {
      * match the user input's search query.
      */
     async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
-        e.preventDefault();
-        setSearchParams({
-            query: searchQuery,
-        });
+        if (searchQuery) {
+            e.preventDefault();
+            setSearchParams(params => {
+                params.set("query", searchQuery);
+                return params;
+            });
+        }
         const data = await RestaurantsService.searchRestaurants(searchParams.get("query") as string);
         setRestaurantsList(data.restaurants);
     }

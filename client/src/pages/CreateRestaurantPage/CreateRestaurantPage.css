@@ -129,7 +129,9 @@
     transition: transform 0.2s ease-in;
 }
 
-.create-rest-file p {
+.create-rest-file p, 
+.create-rest-submit-btn,
+.file-upload-card p {
     color: black;
     text-align: center;
     font-family: Rajdhani;
@@ -138,10 +140,56 @@
 }
 
 .create-rest-file:hover {
-    outline: 2px solid white;
+    outline: 1px solid white;
 }
 
 .create-rest-file:active {
     transform: scale(0.95);
+}
+
+.file-upload-card {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.6rem 1rem;
+    margin: 1rem 0;
+    background-color: rgba(205, 40, 40, 0.772);
+    border-radius: 8px;
+}
+
+.file-upload-card p {
+    font-size: 1rem;
+}
+
+.file-upload-card__trash-icon {
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.file-upload-card__trash-icon:hover {
+    background-color: rgba(205, 40, 40, 0.931);
+}
+
+.file-upload-card__trash-icon:hover svg {
+    fill: white;
+}
+
+/* SUBMIT BUTTON */
+
+.create-rest-submit-btn {
+    background: #80FF7D;
+    padding: 0.4rem;
+    cursor: pointer;
+    border: none;
+    border-radius: 0.2rem;
+}
+
+.create-rest-submit-btn:hover {
+    outline: 1px solid white;
 }
 

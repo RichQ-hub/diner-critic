@@ -78,10 +78,12 @@ export default function CreateRestaurantPage() {
 
                 <FormItemFile 
                     title="Restaurant Image"
+                    selectedImgName={selectedImg?.name}
+                    handleRemoveSelectedImg={() => setSelectedImg(undefined)}
                     onChange={handleImgUpload}
                 /> 
 
-                <button type="submit">Create New Restaurant</button>
+                <button className="create-rest-submit-btn" type="submit">Create New Restaurant</button>
             </form>
         </main>
     )

@@ -11,6 +11,15 @@ interface RestaurantPayload {
     price_range: number;
 }
 
+interface ReviewPayload {
+    title: string;
+    content: string;
+    rating_overall: number;
+    rating_food: number;
+    rating_service: number; 
+    rating_atmosphere: number;
+}
+
 class RestaurantsService {
     async getRestaurants() {
         const response = await RestaurantsAPI.get("/");
@@ -39,6 +48,16 @@ class RestaurantsService {
 
     async deleteRestaurant(restaurantId: string) {
         const response = await RestaurantsAPI.delete(`/${restaurantId}`);
+        return response.data;
+    }
+
+    async getRestaurantReviews(restaurantId: string) {
+        const response = await RestaurantsAPI.get(`/${restaurantId}/reviews`);
+        return response.data;
+    }
+
+    async createReview(restaurantId: string, payload: ReviewPayload) {
+        const response = await RestaurantsAPI.post(`/${restaurantId}/reviews`, payload);
         return response.data;
     }
 }

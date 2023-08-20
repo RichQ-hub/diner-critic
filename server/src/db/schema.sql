@@ -10,6 +10,7 @@
 -- Ensures email matches the specified regex pattern.
 CREATE DOMAIN EmailString AS VARCHAR(64) CHECK (VALUE ~ '^([\w\.\-]+)@([\w\-]+)((\.(\w){2,3})+)$');
 CREATE DOMAIN GenderType AS CHAR(1) CHECK (VALUE IN ('M', 'F'));
+CREATE DOMAIN Rating AS INTEGER CHECK (VALUE >= 1 AND VALUE <= 5);
 
 CREATE TABLE Restaurants (
     id SERIAL,
@@ -20,7 +21,7 @@ CREATE TABLE Restaurants (
     description_short VARCHAR(150), -- Short description displayed on the restaurant card in the finder.
     description_long TEXT, -- Description displayed on the review page.
     img_filename TEXT NOT NULL, -- Stores the main image local reference link.
-    posted_at TIMESTAMPTZ DEFAULT NOW() 
+    posted_at TIMESTAMPTZ DEFAULT NOW(),
 
     PRIMARY KEY (id)
 );
@@ -36,23 +37,22 @@ CREATE TABLE Users (
     PRIMARY KEY (id)
 );
 
+-- NOTE: For now don't worry about the author since we haven't implemented authentication and authorisation.
+
 CREATE TABLE Reviews (
     id SERIAL,
-    author INTEGER NOT NULL,
+    -- author INTEGER NOT NULL,
     restaurant INTEGER NOT NULL,
+    title VARCHAR(50),
     content TEXT,
-    rating_overall INTEGER NOT NULL 
-        CHECK (rating BETWEEN 1 AND 5),
-    rating_food INTEGER NOT NULL 
-        CHECK (rating BETWEEN 1 AND 5),
-    rating_service INTEGER NOT NULL 
-        CHECK (rating BETWEEN 1 AND 5),
-    rating_atmosphere INTEGER NOT NULL 
-        CHECK (rating BETWEEN 1 AND 5),
+    rating_overall Rating NOT NULL,
+    rating_food Rating NOT NULL,
+    rating_service Rating NOT NULL,
+    rating_atmosphere Rating NOT NULL,
     created_at DATE DEFAULT CURRENT_DATE,
 
     PRIMARY KEY (id),
-    FOREIGN KEY (author) REFERENCES Users(id),
+    -- FOREIGN KEY (author) REFERENCES Users(id),
     FOREIGN KEY (restaurant) REFERENCES Restaurants(id)
 );
 

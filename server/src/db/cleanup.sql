@@ -4,9 +4,16 @@
 -- Run via: \i {absolute_path_to_sql_file}
 --      Sample: \i C:/Users/rrqui/OneDrive/Desktop/Projects/diner-critic/server/src/db/cleanup.sql
 
-DROP TABLE Reviews;
-DROP TABLE Restaurants;
-DROP TABLE Users;
+DROP DOMAIN IF EXISTS
+    EmailString,
+    GenderType,
+    Rating
+CASCADE;
 
-DROP DOMAIN EmailString;
-DROP DOMAIN GenderType;
+DROP TABLE  IF EXISTS 
+    Reviews,
+    Restaurants,
+    Users
+CASCADE;
+
+DROP VIEW IF EXISTS RestoDetails;

@@ -12,7 +12,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.deleteRestaurant = exports.editRestaurant = exports.createRestaurant = exports.searchRestaurants = exports.getOneRestaurant = exports.getRestaurants = void 0;
+exports.deleteRestaurant = exports.editRestaurant = exports.createRestaurant = exports.searchRestaurants = exports.createReview = exports.getRestaurantReviews = exports.getRestaurantDetails = exports.getRestaurants = void 0;
 const db_1 = __importDefault(require("../db"));
 /**
  * Returns a list of all the restaurants.
@@ -20,9 +20,9 @@ const db_1 = __importDefault(require("../db"));
 function getRestaurants(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
         try {
+            // We invoke our user-defined view RestoDetails (see in views.sql).
             const allRestaurants = yield db_1.default.query(`
-            SELECT *
-            FROM Restaurants;
+            SELECT * FROM RestoDetails;
         `);
             res.json({
                 restaurants: allRestaurants.rows
@@ -39,7 +39,7 @@ exports.getRestaurants = getRestaurants;
 /**
  * Obtains all the information about a single restaurant by the given id from the req params.
  */
-function getOneRestaurant(req, res) {
+function getRestaurantDetails(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
         try {
             const { restaurantId } = req.params;
@@ -64,7 +64,53 @@ function getOneRestaurant(req, res) {
         }
     });
 }
-exports.getOneRestaurant = getOneRestaurant;
+exports.getRestaurantDetails = getRestaurantDetails;
+function getRestaurantReviews(req, res) {
+    return __awaiter(this, void 0, void 0, function* () {
+        try {
+            const { restaurantId } = req.params;
+            // Note: We could make a user-defined stored procedure (sql function) instead of this or PLpgSQL.
+            const allReviews = yield db_1.default.query(`
+            SELECT  res.id as restaurantID, rev.id as revID, rev.title as revTitle, rev.rating_overall
+            FROM    Restaurants res
+                    JOIN Reviews rev on res.id = rev.restaurant
+            WHERE   res.id = $1;
+        `, [restaurantId]);
+            res.json({
+                reviews: allReviews.rows
+            });
+        }
+        catch (error) {
+            res.status(500).send({
+                message: error
+            });
+        }
+    });
+}
+exports.getRestaurantReviews = getRestaurantReviews;
+function createReview(req, res) {
+    return __awaiter(this, void 0, void 0, function* () {
+        try {
+            const { restaurantId } = req.params;
+            const { title, content, rating_overall, rating_food, rating_service, rating_atmosphere } = req.body;
+            const results = yield db_1.default.query(`
+            INSERT INTO Reviews (restaurant, title, content, rating_overall, rating_food, rating_service, rating_atmosphere)
+            VALUES ($1, $2, $3, $4, $5, $6, $7)
+            RETURNING *;
+        `, [restaurantId, title, content, rating_overall, rating_food, rating_service, rating_atmosphere]);
+            const newReview = results.rows[0];
+            res.json({
+                review: newReview,
+            });
+        }
+        catch (error) {
+            res.status(500).send({
+                message: error
+            });
+        }
+    });
+}
+exports.createReview = createReview;
 function searchRestaurants(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
         try {

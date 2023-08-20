@@ -4,7 +4,9 @@ import upload from '../middleware/multerStorage';
 // Controllers.
 import { 
     getRestaurants,
-    getOneRestaurant,
+    getRestaurantDetails,
+    getRestaurantReviews,
+    createReview,
     createRestaurant,
     editRestaurant,
     deleteRestaurant,
@@ -18,12 +20,12 @@ router.get('/', getRestaurants);
 // we don't set the value of the route param ':restaurantId' to 'search', which is invalid since there
 // are no restaurants with an id of 'search'. So essentially, we pattern match this route '/search' first.
 router.get('/search', searchRestaurants);
-router.get('/:restaurantId', getOneRestaurant);
+router.get('/:restaurantId', getRestaurantDetails);
 router.post('/', upload.single("image"), createRestaurant);
 router.put('/:restaurantId', upload.single("image"), editRestaurant);
 router.delete('/:restaurantId', deleteRestaurant);
 
-// test 
-
+router.get('/:restaurantId/reviews', getRestaurantReviews);
+router.post('/:restaurantId/reviews', createReview);
 
 export default router;

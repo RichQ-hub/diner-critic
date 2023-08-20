@@ -13,9 +13,10 @@ router.get('/', restaurants_1.getRestaurants);
 // we don't set the value of the route param ':restaurantId' to 'search', which is invalid since there
 // are no restaurants with an id of 'search'. So essentially, we pattern match this route '/search' first.
 router.get('/search', restaurants_1.searchRestaurants);
-router.get('/:restaurantId', restaurants_1.getOneRestaurant);
+router.get('/:restaurantId', restaurants_1.getRestaurantDetails);
 router.post('/', multerStorage_1.default.single("image"), restaurants_1.createRestaurant);
 router.put('/:restaurantId', multerStorage_1.default.single("image"), restaurants_1.editRestaurant);
 router.delete('/:restaurantId', restaurants_1.deleteRestaurant);
-// test 
+router.get('/:restaurantId/reviews', restaurants_1.getRestaurantReviews);
+router.post('/:restaurantId/reviews', restaurants_1.createReview);
 exports.default = router;

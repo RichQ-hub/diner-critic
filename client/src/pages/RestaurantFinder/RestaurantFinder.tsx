@@ -58,16 +58,18 @@ export default function RestaurantFinder() {
                     {/* Restaurants List Section */}
                     <div className="rest-list">
                         {restaurantsList.map((restaurant) => {
-                            const { id, name, location, price_range, description_short, img_filename } = restaurant;
+                            const { rest_id, name, location, price_range, description_short, img_filename, num_reviews, avg_rating } = restaurant;
                             return (
                                 <RestaurantCard 
-                                    key={id}
-                                    id={id}
+                                    key={rest_id}
+                                    id={rest_id}
                                     name={name}
                                     location={location}
                                     price_range={price_range}
                                     description_short={description_short}
                                     img_filename={img_filename}
+                                    num_reviews={num_reviews}
+                                    avg_rating={avg_rating}
                                 />
                             )
                         })}

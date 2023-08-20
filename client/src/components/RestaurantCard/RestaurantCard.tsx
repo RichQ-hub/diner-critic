@@ -9,6 +9,8 @@ interface RestaurantCardProps {
     price_range: number;
     description_short: string;
     img_filename: string;
+    num_reviews: number;
+    avg_rating: number;
 }
 
 export default function RestaurantCard(props: RestaurantCardProps) {
@@ -19,6 +21,8 @@ export default function RestaurantCard(props: RestaurantCardProps) {
         price_range, 
         description_short, 
         img_filename, 
+        num_reviews,
+        avg_rating
     } = props;
 
     const [imgRef, setImgRef] = useState<string>("");

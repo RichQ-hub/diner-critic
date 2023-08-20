@@ -6,7 +6,7 @@ import cyberFoodsImg from "../assets/images/restaurants/cyber-foods.gif";
 
 export const restaurantsData: Restaurant[] = [
     {
-        id: "1",
+        rest_id: "1",
         name: "Cafe Diner",
         location: "Europe",
         price_range: 3,
@@ -14,9 +14,11 @@ export const restaurantsData: Restaurant[] = [
         Vestibulum dictum metus vitae tempus maximus. Duis hendrerit turpis vel 
         rutrum venenatis. Integer sit amet pellentesque metus.`,
         img_filename: cafeDinerImg,
+        num_reviews: 2,
+        avg_rating: 2
     },
     {
-        id: "2",
+        rest_id: "2",
         name: "Bake Shop",
         location: "Japan",
         price_range: 5,
@@ -24,9 +26,11 @@ export const restaurantsData: Restaurant[] = [
         Vestibulum dictum metus vitae tempus maximus. Duis hendrerit turpis vel 
         rutrum venenatis. Integer sit amet pellentesque metus.`,
         img_filename: bakeShopImg,
+        num_reviews: 2,
+        avg_rating: 2
     },
     {
-        id: "3",
+        rest_id: "3",
         name: "Burger Joint",
         location: "Sudan",
         price_range: 2,
@@ -34,9 +38,11 @@ export const restaurantsData: Restaurant[] = [
         Vestibulum dictum metus vitae tempus maximus. Duis hendrerit turpis vel 
         rutrum venenatis. Integer sit amet pellentesque metus.`,
         img_filename: burgerJointImg,
+        num_reviews: 2,
+        avg_rating: 2
     },
     {
-        id: "4",
+        rest_id: "4",
         name: "Cyber Foods",
         location: "Mongolia",
         price_range: 2,
@@ -44,5 +50,7 @@ export const restaurantsData: Restaurant[] = [
         Vestibulum dictum metus vitae tempus maximus. Duis hendrerit turpis vel 
         rutrum venenatis. Integer sit amet pellentesque metus.`,
         img_filename: cyberFoodsImg,
+        num_reviews: 2,
+        avg_rating: 2
     },
 ]

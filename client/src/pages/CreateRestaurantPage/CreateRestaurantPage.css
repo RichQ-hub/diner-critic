@@ -153,7 +153,7 @@
     justify-content: space-between;
     padding: 0.6rem 1rem;
     margin: 1rem 0;
-    background-color: rgba(205, 40, 40, 0.772);
+    background-color: rgba(222, 66, 66, 0.878);
     border-radius: 8px;
 }
 
@@ -172,7 +172,7 @@
 }
 
 .file-upload-card__trash-icon:hover {
-    background-color: rgba(205, 40, 40, 0.931);
+    background-color: rgba(179, 127, 127, 0.656);
 }
 
 .file-upload-card__trash-icon:hover svg {

@@ -12,7 +12,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.deleteRestaurant = exports.editRestaurant = exports.createRestaurant = exports.searchRestaurants = exports.createReview = exports.getRestaurantReviews = exports.getRestaurantDetails = exports.getRestaurants = void 0;
+exports.deleteRestaurant = exports.editRestaurant = exports.createRestaurant = exports.searchRestaurants = exports.deleteReview = exports.createReview = exports.getRestaurantReviews = exports.getRestaurantDetails = exports.getRestaurants = void 0;
 const db_1 = __importDefault(require("../db"));
 /**
  * Returns a list of all the restaurants.
@@ -116,6 +116,33 @@ function createReview(req, res) {
     });
 }
 exports.createReview = createReview;
+function deleteReview(req, res) {
+    return __awaiter(this, void 0, void 0, function* () {
+        try {
+            const { reviewId } = req.params;
+            const result = yield db_1.default.query(`
+            DELETE FROM Reviews
+            WHERE id = $1
+            RETURNING *;
+        `, [reviewId]);
+            if (result.rows.length === 0) {
+                return res
+                    .status(404)
+                    .send({ message: 'Invalid Review ID.' });
+            }
+            const deletedReview = result.rows[0];
+            res.json({
+                review: deletedReview
+            });
+        }
+        catch (error) {
+            res.status(500).send({
+                message: error
+            });
+        }
+    });
+}
+exports.deleteReview = deleteReview;
 function searchRestaurants(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
         try {

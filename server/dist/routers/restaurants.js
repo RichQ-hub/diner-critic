@@ -19,4 +19,5 @@ router.put('/:restaurantId', multerStorage_1.default.single("image"), restaurant
 router.delete('/:restaurantId', restaurants_1.deleteRestaurant);
 router.get('/:restaurantId/reviews', restaurants_1.getRestaurantReviews);
 router.post('/:restaurantId/reviews', restaurants_1.createReview);
+router.delete('/:restaurantId/reviews/:reviewId', restaurants_1.deleteReview);
 exports.default = router;

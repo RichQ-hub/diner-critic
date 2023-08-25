@@ -109,6 +109,35 @@ export async function createReview(req: Request, res: Response) {
     }
 }
 
+export async function deleteReview(req: Request, res: Response) {
+    try {
+        const { reviewId } = req.params;
+
+        const result = await db.query(`
+            DELETE FROM Reviews
+            WHERE id = $1
+            RETURNING *;
+        `, [reviewId]);
+
+        if (result.rows.length === 0) {
+            return res
+            .status(404)
+            .send({ message: 'Invalid Review ID.' });
+        }
+
+        const deletedReview = result.rows[0];
+
+        res.json({
+            review: deletedReview
+        });
+
+    } catch (error) {
+        res.status(500).send({ 
+            message: error 
+        });
+    }
+}
+
 export async function searchRestaurants(req: Request, res: Response) {
     try {
         const { query } = req.query;

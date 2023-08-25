@@ -38,12 +38,12 @@ BEGIN
                 res.description_long, 
                 res.img_filename, 
                 count(rev.id)::INTEGER,
-                trunc(coalesce(avg(rev.rating_overall), 0), 2),
-                trunc(coalesce(avg(rev.rating_food), 0), 2),
-                trunc(coalesce(avg(rev.rating_service), 0), 2),
-                trunc(coalesce(avg(rev.rating_atmosphere), 0), 2)
+                trunc(coalesce(avg(rev.rating_overall), 0), 1),
+                trunc(coalesce(avg(rev.rating_food), 0), 1),
+                trunc(coalesce(avg(rev.rating_service), 0), 1),
+                trunc(coalesce(avg(rev.rating_atmosphere), 0), 1)
         FROM    Restaurants res
-        JOIN    Reviews rev on rev.restaurant = res.id
+                LEFT OUTER JOIN Reviews rev on rev.restaurant = res.id
         WHERE   res.id = rest_id
         GROUP BY res.name, res.location, res.description_long, res.img_filename;
 END;

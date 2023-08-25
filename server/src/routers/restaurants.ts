@@ -7,6 +7,7 @@ import {
     getRestaurantDetails,
     getRestaurantReviews,
     createReview,
+    deleteReview,
     createRestaurant,
     editRestaurant,
     deleteRestaurant,
@@ -26,5 +27,6 @@ router.put('/:restaurantId', upload.single("image"), editRestaurant);
 router.delete('/:restaurantId', deleteRestaurant);
 router.get('/:restaurantId/reviews', getRestaurantReviews);
 router.post('/:restaurantId/reviews', createReview);
+router.delete('/:restaurantId/reviews/:reviewId', deleteReview);
 
 export default router;

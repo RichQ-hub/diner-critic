@@ -1,10 +1,10 @@
-import { Restaurant } from "../types/types";
+import { RestaurantState } from "../types/types";
 import cafeDinerImg from "../assets/images/restaurants/cafe-diner.gif";
 import bakeShopImg from "../assets/images/restaurants/bake-shop.gif";
 import burgerJointImg from "../assets/images/restaurants/burger-joint.gif";
 import cyberFoodsImg from "../assets/images/restaurants/cyber-foods.gif";
 
-export const restaurantsData: Restaurant[] = [
+export const restaurantsData: RestaurantState[] = [
     {
         rest_id: "1",
         name: "Cafe Diner",

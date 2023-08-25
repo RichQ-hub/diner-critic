@@ -1,17 +1,17 @@
 import { useState, createContext, ReactNode } from "react"
-import { Restaurant } from "../types/types"
+import { RestaurantState } from "../types/types"
 
 interface IRestaurantsListContext {
-    restaurantsList: Restaurant[];
-    setRestaurantsList: React.Dispatch<React.SetStateAction<Restaurant[]>>; 
+    restaurantsList: RestaurantState[];
+    setRestaurantsList: React.Dispatch<React.SetStateAction<RestaurantState[]>>; 
 }
 
 /**
  * NOTE: setRestaurantsList function.
  * This function has to be of type:
- *      React.Dispatch<React.SetStateAction<Restaurant[]>>
+ *      React.Dispatch<React.SetStateAction<RestaurantState[]>>
  * instead of:
- *      (restaurantsList: Restaurant[]) => void
+ *      (restaurantsList: RestaurantState[]) => void
  * 
  * Why?
  * Because a normal setState function takes a value, but also a function (oldval) => {*logic here*}.
@@ -26,7 +26,7 @@ interface RestaurantsListContextProviderProps {
 export const RestaurantsListContext = createContext({} as IRestaurantsListContext)
 
 export default function RestaurantsListContextProvider({children}: RestaurantsListContextProviderProps) {
-    const [restaurantsList, setRestaurantsList] = useState<Restaurant[]>([]);
+    const [restaurantsList, setRestaurantsList] = useState<RestaurantState[]>([]);
 
     return (
         <RestaurantsListContext.Provider value={{ restaurantsList, setRestaurantsList }}>

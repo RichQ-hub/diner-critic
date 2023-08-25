@@ -22,7 +22,6 @@ export default function ReviewCardRating(props: ReviewCardRatingProps) {
             <div className="review-card__rating-circles-wrapper">
                 {/* This simply creates an empty array. */}
                 {Array(5).fill(null).map((_, idx) => {
-                    const currIdx = idx + 1;
                     let ratingColour = 'rating--none';
 
                     if (idx + 1 <= rating) {

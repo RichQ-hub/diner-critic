@@ -1,5 +1,6 @@
 import React from 'react'
 import ReviewCardRating from './ReviewCardRating';
+import StarRating from '../StarRating/StarRating';
 
 import './ReviewCard.css';
 
@@ -53,6 +54,12 @@ export default function ReviewCard(props: ReviewCardProps) {
                 <div className='review-card__date-wrapper'>
                     <p className='review-card__date'>{`${postedDate.getDate()}/${postedDate.getMonth() + 1}/${postedDate.getFullYear()}`}</p>
                 </div>
+            </div>
+
+            {/* Overall Rating Section. */}
+            <div className='review-card__rating-overall'>
+                <h4>Overall:</h4>
+                <StarRating rating_overall={rating_overall} />
             </div>
 
             {/* Ratings Section. */}

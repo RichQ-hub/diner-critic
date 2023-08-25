@@ -1,9 +1,15 @@
 
 /* FONTS */
-@import url('https://fonts.googleapis.com/css2?family=Keania+One&family=Rajdhani:wght@300;400;500;600;700&family=Roboto:wght@100;300;400;500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Keania+One&family=Rajdhani:wght@300;400;500;600;700&family=Roboto:wght@100;300;400;500;700&display=swap');
 
 :root {
     --color-orange: #FF8A00;
+
+    --rating-one: #FF2626;
+    --rating-two: #F18200;
+    --rating-three: #ffd900;
+    --rating-four: #95cb01;
+    --rating-five: #03a745;
 }
 
 * {

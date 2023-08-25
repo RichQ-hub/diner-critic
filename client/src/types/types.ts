@@ -1,4 +1,4 @@
-export interface Restaurant {
+export interface RestaurantState {
     rest_id: string;
     name: string;
     location: string;
@@ -7,4 +7,16 @@ export interface Restaurant {
     img_filename: string;
     num_reviews: number;
     avg_rating: number;
+}
+
+export interface ReviewState {
+    review_id: string;
+    restaurant_id: string;
+    title: string;
+    content: string;
+    rating_overall: number;
+    rating_food: number;
+    rating_service: number;
+    rating_atmosphere: number;
+    created_at: string;
 }

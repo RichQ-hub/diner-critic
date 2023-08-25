@@ -1,51 +1,22 @@
 import './RestaurantPage.css';
 import { useParams } from 'react-router-dom'
 import { useEffect, useState } from 'react';
-import { ReviewState } from '../../types/types';
+import { RestaurantSummaryState, ReviewState } from '../../types/types';
 import { reviewsData } from '../../data/reviewsData';
 import ReviewCard from '../../components/ReviewCard/ReviewCard';
 import RestaurantsService from "../../services/RestaurantsService";
-
-import cafeShopImg from '../../assets/images/restaurants/cafe-diner.gif';
 import StarRating from '../../components/StarRating/StarRating';
-
-const dummyRestDetails = {
-    name: 'Cafe Shop',
-    location: 'Alice Springs, Australia',
-    img_filename: cafeShopImg,
-    description_long: `This course provides a programmer's view on how a computer system executes programs, manipulates data and communicates. It enables students to become effective programmers in dealing with issues of performance, portability, and robustness.\n
-    It is typically taken in the term after completing COMP1511, but could be delayed and taken later. It serves as a foundation for later courses on networks, operating systems, computer architecture and compilers, where a deeper understanding of systems-level issues is required.\n
-    It is typically taken in the term after completing COMP1511, but could be delayed and taken later. It serves as a foundation for later courses on networks, operating systems, computer architecture and compilers, where a deeper understanding of systems-level issues is required.`,
-    num_ratings: 45,
-    overall_rating_avg: 2.3,
-    food_rating_avg: 2.5,
-    service_rating_avg: 1.7,
-    atmosphere_rating_avg: 4.9,
-}
-
-const dummyAvgRatings = [
-    {
-        title: 'Food',
-        rating: dummyRestDetails.food_rating_avg,
-    },
-    {
-        title: 'Service',
-        rating: dummyRestDetails.service_rating_avg,
-    },
-    {
-        title: 'Atmosphere',
-        rating: dummyRestDetails.atmosphere_rating_avg,
-    },
-]
 
 export default function RestaurantPage() {
     const { restaurantId } = useParams();
     const [reviews, setReviews] = useState<ReviewState[]>([]);
+    const [restaurantDetails, setRestaurantDetails] = useState<RestaurantSummaryState>({} as RestaurantSummaryState);
+    const [restaurantImgRef, setRestaurantImgRef] = useState<string>("");
 
+    /**
+     * Fetches all the reviews for the current restaurant.
+     */
     useEffect(() => {
-        // Dummy data for now.
-        // setReviews(reviewsData);
-
         async function fetchReviews() {
             const data = await RestaurantsService.getRestaurantReviews(restaurantId as string);
             setReviews(data.reviews);
@@ -53,33 +24,77 @@ export default function RestaurantPage() {
         fetchReviews();
     }, []);
 
+    /**
+     * Fetches the summary data for the current restaurant.
+     */
+    useEffect(() => {
+        async function fetchSummary() {
+            const data = await RestaurantsService.getRestaurantDetails(restaurantId as string);
+            setRestaurantDetails(data.restaurant);
+        }
+        fetchSummary();
+    }, []);
+
+    /**
+     * Loads the image dynamically. This gets run when the restaurantDetails state changes (so it is
+     * set as a dependency).
+     */
+    useEffect(() => {
+        async function getRestaurantImg() {
+            try {
+                const img = await import(`../../assets/storage/${restaurantDetails.img_filename}`);
+                // The import() function returns a Module object, and the actual link to
+                // the image is stored in the "default" property.
+                setRestaurantImgRef(img.default);
+            } catch (error) {
+                console.log(error);
+            }
+        }
+        getRestaurantImg();
+    }, [restaurantDetails]);
+
+    const avgRatings = [
+        {
+            title: 'Food',
+            rating: restaurantDetails.food_rating_avg,
+        },
+        {
+            title: 'Service',
+            rating: restaurantDetails.service_rating_avg,
+        },
+        {
+            title: 'Atmosphere',
+            rating: restaurantDetails.atmosphere_rating_avg,
+        },
+    ]
+
     return (
         <main className='rest-review-page'>
             <div className='rest-page-content'>
                 <section className="rest-summary rest-page--padding">
-                    <h1 className='rest-summary__name'>{dummyRestDetails.name}</h1>
+                    <h1 className='rest-summary__name'>{restaurantDetails.name}</h1>
 
                     {/* Num Ratings. */}
                     <div className='rest-summary__num-ratings'>
-                        <StarRating rating_overall={dummyRestDetails.overall_rating_avg}/>
-                        <p>{`${dummyRestDetails.num_ratings} Ratings`}</p>
+                        <StarRating rating_overall={restaurantDetails.overall_rating_avg}/>
+                        <p>{`${restaurantDetails.num_reviews} Reviews`}</p>
                     </div>
 
                     {/* Location. */}
                     <div className="rest-summary__location">
                         <h3>Location</h3>
-                        <p>{dummyRestDetails.location}</p>
+                        <p>{restaurantDetails.location}</p>
                     </div>
 
                     {/* Restaurant Image. */}
                     <div className="rest-summary__img-wrapper">
                         {/* <img src={imgBorder} className="rest-summary__img-border" /> */}
-                        <img src={dummyRestDetails.img_filename} className='rest-summary__img' />
+                        <img src={restaurantImgRef} className='rest-summary__img' />
                     </div>
 
                     {/* Restaurant Average Ratings Section. */}
                     <div className="rest-summary__ratings">
-                        {dummyAvgRatings.map((r) => {
+                        {avgRatings.map((r) => {
                             const { title, rating } = r;
                             return (
                                 <div className="rest-summary__avg-rating" key={title}>
@@ -94,7 +109,7 @@ export default function RestaurantPage() {
                     <div className='rest-summary__desc'>
                         <h3>Description</h3>
                         <hr />
-                        <p className="display--linebreak">{dummyRestDetails.description_long}</p>
+                        <p className="display--linebreak">{restaurantDetails.description_long}</p>
                     </div>
                 </section>
 

@@ -26,7 +26,7 @@ class RestaurantsService {
         return response.data;
     }
 
-    async getOneRestaurant(restaurantId: string) {
+    async getRestaurantDetails(restaurantId: string) {
         const response = await RestaurantsAPI.get(`/${restaurantId}`);
         return response.data;
     }
@@ -58,6 +58,11 @@ class RestaurantsService {
 
     async createReview(restaurantId: string, payload: ReviewPayload) {
         const response = await RestaurantsAPI.post(`/${restaurantId}/reviews`, payload);
+        return response.data;
+    }
+
+    async delete(restaurantId: string, reviewId: string) {
+        const response = await RestaurantsAPI.delete(`/${restaurantId}/reviews/${reviewId}`);
         return response.data;
     }
 }

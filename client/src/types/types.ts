@@ -10,8 +10,7 @@ export interface RestaurantState {
 }
 
 export interface ReviewState {
-    review_id: string;
-    restaurant_id: string;
+    id: string;
     title: string;
     content: string;
     rating_overall: number;

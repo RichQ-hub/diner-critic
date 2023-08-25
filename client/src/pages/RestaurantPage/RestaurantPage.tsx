@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import { ReviewState } from '../../types/types';
 import { reviewsData } from '../../data/reviewsData';
 import ReviewCard from '../../components/ReviewCard/ReviewCard';
+import RestaurantsService from "../../services/RestaurantsService";
 
 import cafeShopImg from '../../assets/images/restaurants/cafe-diner.gif';
 import StarRating from '../../components/StarRating/StarRating';
@@ -43,7 +44,13 @@ export default function RestaurantPage() {
 
     useEffect(() => {
         // Dummy data for now.
-        setReviews(reviewsData);
+        // setReviews(reviewsData);
+
+        async function fetchReviews() {
+            const data = await RestaurantsService.getRestaurantReviews(restaurantId as string);
+            setReviews(data.reviews);
+        }
+        fetchReviews();
     }, []);
 
     return (
@@ -95,8 +102,7 @@ export default function RestaurantPage() {
                     <div className="rest-reviews__list">
                         {reviews.map((review: ReviewState) => {
                             const {
-                                review_id,
-                                restaurant_id,
+                                id,
                                 title,
                                 content,
                                 rating_overall,
@@ -108,9 +114,8 @@ export default function RestaurantPage() {
 
                             return (
                                 <ReviewCard 
-                                    key={review_id}
-                                    id={review_id}
-                                    restaurant_id={restaurant_id}
+                                    key={id}
+                                    id={id}
                                     title={title}
                                     content={content}
                                     rating_overall={rating_overall}

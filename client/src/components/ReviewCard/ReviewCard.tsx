@@ -5,7 +5,6 @@ import './ReviewCard.css';
 
 interface ReviewCardProps {
     id: string;
-    restaurant_id: string;
     title: string;
     content: string;
     rating_overall: number;
@@ -18,7 +17,6 @@ interface ReviewCardProps {
 export default function ReviewCard(props: ReviewCardProps) {
     const {
         id,
-        restaurant_id,
         title,
         content,
         rating_overall,

@@ -35,6 +35,17 @@ export const reviewsData: ReviewState[] = [
         rating_atmosphere: 5,
         created_at: '2009-12-24',
     },
+    {
+        review_id: '3',
+        restaurant_id: '1',
+        title: "Worst Customer Service EVERR.",
+        content: "I don’t know what it is, but the atmosphere here is amazing. The waiters are all very patient and well trained. The seafood dishes I ordered were presented in perfection. Can’t recommend this place enough!!",
+        rating_overall: 5,
+        rating_food: 2,
+        rating_service: 1,
+        rating_atmosphere: 5,
+        created_at: '2009-12-24',
+    },
 ]
 
 /**

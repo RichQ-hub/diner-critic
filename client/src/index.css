@@ -21,3 +21,7 @@
 a {
     text-decoration: none;
 }
+
+.display--linebreak {
+    white-space: pre-line;
+}

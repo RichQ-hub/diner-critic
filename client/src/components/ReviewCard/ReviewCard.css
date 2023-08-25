@@ -101,10 +101,6 @@
     line-height: 1.5625rem; /* 178.571% */
 }
 
-.display--linebreak {
-    white-space: pre-line;
-}
-
 /* Rating Colours */
 
 .rating--one {

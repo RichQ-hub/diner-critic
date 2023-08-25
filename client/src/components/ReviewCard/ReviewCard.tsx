@@ -1,4 +1,3 @@
-import React from 'react'
 import ReviewCardRating from './ReviewCardRating';
 import StarRating from '../StarRating/StarRating';
 

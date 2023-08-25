@@ -24,7 +24,6 @@ router.get('/:restaurantId', getRestaurantDetails);
 router.post('/', upload.single("image"), createRestaurant);
 router.put('/:restaurantId', upload.single("image"), editRestaurant);
 router.delete('/:restaurantId', deleteRestaurant);
-
 router.get('/:restaurantId/reviews', getRestaurantReviews);
 router.post('/:restaurantId/reviews', createReview);
 

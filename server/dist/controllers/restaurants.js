@@ -22,7 +22,7 @@ function getRestaurants(req, res) {
         try {
             // We invoke our user-defined view RestoDetails (see in views.sql).
             const allRestaurants = yield db_1.default.query(`
-            SELECT * FROM RestoDetails;
+            SELECT * FROM AllRestaurantCardDetails;
         `);
             res.json({
                 restaurants: allRestaurants.rows
@@ -44,9 +44,7 @@ function getRestaurantDetails(req, res) {
         try {
             const { restaurantId } = req.params;
             const restaurant = yield db_1.default.query(`
-            SELECT * 
-            FROM Restaurants
-            WHERE id = $1;
+            SELECT * FROM RestaurantPageDetails($1);
         `, [restaurantId]);
             if (restaurant.rows.length === 0) {
                 return res
@@ -71,7 +69,14 @@ function getRestaurantReviews(req, res) {
             const { restaurantId } = req.params;
             // Note: We could make a user-defined stored procedure (sql function) instead of this or PLpgSQL.
             const allReviews = yield db_1.default.query(`
-            SELECT  res.id as restaurantID, rev.id as revID, rev.title as revTitle, rev.rating_overall
+            SELECT  rev.id, 
+                    rev.title, 
+                    rev.content, 
+                    rev.rating_overall, 
+                    rev.rating_food, 
+                    rev.rating_service, 
+                    rev.rating_atmosphere, 
+                    rev.created_at
             FROM    Restaurants res
                     JOIN Reviews rev on res.id = rev.restaurant
             WHERE   res.id = $1;

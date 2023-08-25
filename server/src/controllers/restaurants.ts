@@ -8,7 +8,7 @@ export async function getRestaurants(req: Request, res: Response) {
     try {
         // We invoke our user-defined view RestoDetails (see in views.sql).
         const allRestaurants = await db.query(`
-            SELECT * FROM RestoDetails;
+            SELECT * FROM AllRestaurantCardDetails;
         `);
 
         res.json({
@@ -29,9 +29,7 @@ export async function getRestaurantDetails(req: Request, res: Response) {
         const { restaurantId } = req.params;
 
         const restaurant = await db.query(`
-            SELECT * 
-            FROM Restaurants
-            WHERE id = $1;
+            SELECT * FROM RestaurantPageDetails($1);
         `, [restaurantId]);
 
         if (restaurant.rows.length === 0) {
@@ -56,7 +54,14 @@ export async function getRestaurantReviews(req: Request, res: Response) {
         
         // Note: We could make a user-defined stored procedure (sql function) instead of this or PLpgSQL.
         const allReviews = await db.query(`
-            SELECT  res.id as restaurantID, rev.id as revID, rev.title as revTitle, rev.rating_overall
+            SELECT  rev.id, 
+                    rev.title, 
+                    rev.content, 
+                    rev.rating_overall, 
+                    rev.rating_food, 
+                    rev.rating_service, 
+                    rev.rating_atmosphere, 
+                    rev.created_at
             FROM    Restaurants res
                     JOIN Reviews rev on res.id = rev.restaurant
             WHERE   res.id = $1;

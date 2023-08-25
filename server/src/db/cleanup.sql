@@ -10,10 +10,13 @@ DROP DOMAIN IF EXISTS
     Rating
 CASCADE;
 
-DROP TABLE  IF EXISTS 
+DROP TABLE IF EXISTS 
     Reviews,
     Restaurants,
     Users
 CASCADE;
 
 DROP VIEW IF EXISTS RestoDetails;
+DROP VIEW IF EXISTS AllRestaurantCardDetails;
+DROP TYPE IF EXISTS RestaurantDetailsRecord CASCADE;
+DROP FUNCTION IF EXISTS RestaurantPageDetails CASCADE;

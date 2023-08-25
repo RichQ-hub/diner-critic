@@ -1,7 +1,7 @@
 -- Run via: \i {absolute_path_to_sql_file}
 --      Sample: \i C:/Users/rrqui/OneDrive/Desktop/Projects/diner-critic/server/src/db/views.sql
 
-CREATE OR REPLACE VIEW RestoDetails(rest_id, name, description_short, location, price_range, img_filename, num_reviews, avg_rating)
+CREATE OR REPLACE VIEW AllRestaurantCardDetails(rest_id, name, description_short, location, price_range, img_filename, num_reviews, avg_rating)
 AS
     SELECT  res.id, 
             res.name, 
@@ -15,6 +15,39 @@ AS
             LEFT OUTER JOIN Reviews rev on res.id = rev.restaurant
     GROUP BY res.id, res.name, res.location, res.price_range, res.img_filename
 ;
+
+CREATE TYPE RestaurantDetailsRecord AS (
+    name VARCHAR(30),
+    location VARCHAR(50),
+    description_long TEXT,
+    img_filename TEXT,
+    num_reviews INTEGER,
+    overall_rating_avg DECIMAL,
+    food_rating_avg DECIMAL,
+    service_rating_avg DECIMAL,
+    atmosphere_rating_avg DECIMAL
+);
+
+CREATE OR REPLACE FUNCTION 
+    RestaurantPageDetails(rest_id INTEGER) RETURNS SETOF RestaurantDetailsRecord
+AS $$
+BEGIN
+    RETURN query
+        SELECT  res.name, 
+                res.location, 
+                res.description_long, 
+                res.img_filename, 
+                count(rev.id)::INTEGER,
+                trunc(coalesce(avg(rev.rating_overall), 0), 2),
+                trunc(coalesce(avg(rev.rating_food), 0), 2),
+                trunc(coalesce(avg(rev.rating_service), 0), 2),
+                trunc(coalesce(avg(rev.rating_atmosphere), 0), 2)
+        FROM    Restaurants res
+        JOIN    Reviews rev on rev.restaurant = res.id
+        WHERE   res.id = rest_id
+        GROUP BY res.name, res.location, res.description_long, res.img_filename;
+END;
+$$ LANGUAGE plpgsql;
 
 -- NOTES:
 -- We use (left outer join) since we want to display restuarants even if they have no

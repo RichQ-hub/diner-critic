@@ -1,8 +1,9 @@
-import { useState } from 'react'
 import FormItem from '../FormItem/FormItem';
 
 interface FormItemSelectProps {
     title: string;
+    pageStyle: string;
+    inputStyle: string;
     selectedItem: string;
     isDropdownOpen: boolean;
     handleDropdownOpen: () => void;
@@ -11,7 +12,9 @@ interface FormItemSelectProps {
 
 export default function FormItemSelect(props: FormItemSelectProps) {
     const { 
-        title, 
+        title,
+        pageStyle,
+        inputStyle,
         selectedItem,
         isDropdownOpen,
         handleDropdownOpen,
@@ -19,9 +22,9 @@ export default function FormItemSelect(props: FormItemSelectProps) {
     } = props;
 
     return (
-        <FormItem title={title}>
+        <FormItem title={title} pageStyle={pageStyle}>
             {/* Button */}
-            <div className={`create-rest-select input--bg ${isDropdownOpen ? 'dropdown--open' : ''}`} onClick={handleDropdownOpen}>
+            <div className={`${inputStyle} ${isDropdownOpen ? 'dropdown--open' : ''}`} onClick={handleDropdownOpen}>
                 <p>{selectedItem}</p>
             </div>
 

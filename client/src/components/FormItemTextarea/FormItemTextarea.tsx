@@ -3,16 +3,18 @@ import FormItem from '../FormItem/FormItem';
 
 interface FormItemTextareaProps {
     title: string;
+    pageStyle: string;
+    inputStyle: string;
     onChange: (e: React.FormEvent<HTMLTextAreaElement>) => void;
 }
 
 export default function FormItemTextarea(props: FormItemTextareaProps) {
-    const { title, onChange } = props;
+    const { title, pageStyle, inputStyle, onChange } = props;
 
     return (
-        <FormItem title={title}>
+        <FormItem title={title} pageStyle={pageStyle}>
             <textarea 
-                className='create-rest-textarea input--bg'
+                className={inputStyle}
                 onChange={onChange}
             />
         </FormItem>

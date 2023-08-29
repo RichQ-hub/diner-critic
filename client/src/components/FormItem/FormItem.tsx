@@ -3,13 +3,14 @@ import React from 'react'
 interface FormItemProps {
     children: React.ReactNode;
     title: string;
+    pageStyle: string;
 }
 
 export default function FormItem(props: FormItemProps) {
-    const { children, title } = props;
+    const { children, title, pageStyle } = props;
 
     return (
-        <div className='create-rest-input'>
+        <div className={pageStyle}>
             <h2>{title}</h2>
             {children}
         </div>

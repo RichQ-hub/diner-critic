@@ -1,0 +1,170 @@
+.review-modal-bg {
+    position: fixed;
+    z-index: 100;
+    top: 0;    
+    height: 100vh;
+    width: 100%;
+    background: rgba(0, 0, 0, 0.12);
+    backdrop-filter: blur(4.5px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.review-modal {
+    position: relative;
+    width: 900px;
+    height: 600px;
+}
+
+.modal--border {
+    background-image: url(../../assets/images/modal-border.png);
+    background-size: 100% 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.review-modal-dark-bg {
+    position: absolute;
+    z-index: -1;
+    top: 1.2rem;
+    bottom: 1.2rem;
+    left: 0.4rem;
+    right: 0.4rem;
+    background: #050E1B;
+}
+
+.review-modal-body {
+    position: absolute;
+    top: 1.2rem;
+    bottom: 1.2rem;
+    left: 0.4rem;
+    right: 0.4rem;
+    padding: 1.6rem 2.2rem;
+
+    display: flex;
+    flex-direction: column;
+    /* align-items: stretch; */
+}
+
+/* Close Button. */
+
+.review-modal-close-btn {
+    cursor: pointer;
+    position: absolute;
+    right: 2rem;
+    top: 2rem;
+    z-index: 2;
+    padding: 0.3rem;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+}
+
+.review-modal-close-btn svg {
+    fill: rgb(252, 177, 26);
+    height: 100%;
+    width: 100%;
+}
+
+.review-modal-close-btn:hover {
+    background-color: rgba(255, 255, 255, 0.288);
+}
+
+/* Header section. --------------------------- */
+
+.review-modal__header {
+    height: 10%;
+    display: flex;
+    align-items: center;
+}
+
+.review-modal__header p {
+    padding: 0 1.2rem;
+    color: var(--color-orange);
+    font-family: Rajdhani;
+    font-size: 1.8rem;
+    font-weight: 700;
+}
+
+.review-modal__header svg {
+    fill: var(--color-orange);
+    height: 60%;
+    width: auto;
+}
+
+.review-modal-body hr {
+    border-color: rgba(253, 230, 204, 0.276);
+    margin-bottom: 0.6rem;
+}
+
+/* Text Input Section. */
+
+.review-modal__form {
+    display: grid;
+    grid-template-columns: 60% 1fr;
+    height: 100%;
+}
+
+.review-modal-inputs {
+    padding: 0 1.2rem;
+    margin: 0.5rem 0;
+    display: flex;
+    flex-direction: column;
+    gap: 1.8rem;
+}
+
+/* This is a page style */
+
+.review-modal-input h2 {
+    color: white;
+    font-family: Rajdhani;
+    font-size: 1.4rem;
+    font-weight: 700;
+    line-height: 1.5625rem;
+    margin-bottom: 0.4rem;
+}
+
+.review-modal-input:last-child {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.review-input--bg {
+    background: none;
+    border: none;
+    width: 100%;
+    height: 2.6rem;
+    border-radius: 0.5rem;
+    background: #212F44;
+
+    padding: 0.6rem 1rem;
+    color: white;
+    font-family: Roboto, sans-serif;
+    font-size: 1rem;
+}
+
+/* Text area section. */
+
+.review-modal-textarea {
+    flex: 1;
+    resize: none;
+    overflow-y: scroll;
+}
+
+/* Scrollbar styles for the text area */
+
+.review-modal-textarea::-webkit-scrollbar {
+    width: 0.4rem;
+    padding: 0 0.2rem;
+}
+
+.review-modal-textarea::-webkit-scrollbar-thumb {
+    background-color: darkgrey;
+    outline: 1px solid slategrey;
+    border-radius: 100px;
+}
+
+/* RATING INPUT SECTION ----------------------------- */
+

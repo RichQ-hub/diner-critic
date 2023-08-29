@@ -8,6 +8,14 @@ import PriceRangeSelect from "../../components/PriceRangeSelect/PriceRangeSelect
 import RestaurantsService from "../../services/RestaurantsService";
 import FormItemFile from "../../components/FormItemFile/FormItemFile";
 
+/**Class Names for each input for this page. */
+
+const PAGE_STYLE_CLASSNAME = 'create-rest-input';
+const TEXT_STYLE_CLASSNAME = 'create-rest-text input--bg';
+const SELECT_STYLE_CLASSNAME = 'create-rest-select input--bg';
+const TEXTAREA_STYLE_CLASSNAME = 'create-rest-textarea input--bg';
+const FILE_STYLE_CLASSNAME = 'create-rest-file';
+
 export default function CreateRestaurantPage() {
     const name = useFormInputText();
     const location = useFormInputText();
@@ -66,27 +74,39 @@ export default function CreateRestaurantPage() {
             <form className="create-rest-form" action="" onSubmit={handleSubmit}>
                 <FormItemText 
                     title="Name" 
+                    pageStyle={PAGE_STYLE_CLASSNAME}
+                    inputStyle={TEXT_STYLE_CLASSNAME}
                     onChange={name.handleChange} 
                 />
                 <FormItemText 
                     title="Location" 
+                    pageStyle={PAGE_STYLE_CLASSNAME}
+                    inputStyle={TEXT_STYLE_CLASSNAME}
                     onChange={location.handleChange} 
                 />
                 <PriceRangeSelect 
                     selectedItem={priceRange.toString()}
+                    pageStyle={PAGE_STYLE_CLASSNAME}
+                    inputStyle={SELECT_STYLE_CLASSNAME}
                     handleChangePriceRange={handleChangePriceRange}
                 />
                 <FormItemTextarea 
                     title="Short Description (Displayed on Search Page)" 
+                    pageStyle={PAGE_STYLE_CLASSNAME}
+                    inputStyle={TEXTAREA_STYLE_CLASSNAME}
                     onChange={shortDesc.handleChange}
                 />
                 <FormItemTextarea 
                     title="Long Description (Displayed on Review Page)" 
+                    pageStyle={PAGE_STYLE_CLASSNAME}
+                    inputStyle={TEXTAREA_STYLE_CLASSNAME}
                     onChange={longDesc.handleChange}
                 />
 
                 <FormItemFile 
                     title="Restaurant Image"
+                    pageStyle={PAGE_STYLE_CLASSNAME}
+                    inputStyle={FILE_STYLE_CLASSNAME}
                     selectedImgName={selectedImg?.name}
                     handleRemoveSelectedImg={() => setSelectedImg(undefined)}
                     onChange={handleImgUpload}

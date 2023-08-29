@@ -5,7 +5,6 @@ import { useFormInputText } from '../../hooks/useFormInputText';
 import FormItemTextarea from '../FormItemTextarea/FormItemTextarea';
 import RatingInput from '../RatingInput/RatingInput';
 import { useFormInputRating } from '../../hooks/useFormInputRating';
-import { ReviewState } from '../../types/types';
 import RestaurantsService from "../../services/RestaurantsService";
 import { useNavigate } from 'react-router-dom';
 
@@ -48,8 +47,8 @@ export default function ReviewModal(props: ReviewModalProps) {
     }
 
     return ReactDOM.createPortal(
-        <div className='review-modal-bg' onClick={() => handleToggleModal(false)}>
-            <div className="review-modal modal--border" onClick={(e) => e.stopPropagation()}>
+        <div className='review-modal-bg'>
+            <div className="review-modal modal--border">
                 <div className="review-modal-dark-bg"></div>
                 <div className="review-modal-body">
                     {/* Close Button. */}

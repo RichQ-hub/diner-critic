@@ -1,0 +1,44 @@
+.sort-btn {
+    position: relative;
+    cursor: pointer;
+    padding: 0 1rem;
+    background: rgba(59, 111, 160, 0.30);
+    border: 1px solid #287C8F;
+    height: 100%;
+    width: 10rem;
+    display: flex;
+    align-items: center;
+}
+
+.sort-btn p, .sort-option__item {
+    color: #FFF;
+    text-align: center;
+    font-family: Rajdhani;
+    font-size: 1.2rem;
+    font-weight: 400;
+}
+
+/* Dropdown section. */
+
+.sort-dropdown {
+    position: absolute;
+    top: calc(100% + 2px);
+    left: 0;
+    right: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    background-color: #242526;
+}
+
+.sort-option__item {
+    width: 100%;
+    cursor: pointer;
+    padding: 0.4rem 1rem;
+    transition: background-color 0.4s;
+    text-align: start;
+}
+
+.sort-option__item:hover {
+    background-color: #525357;
+}

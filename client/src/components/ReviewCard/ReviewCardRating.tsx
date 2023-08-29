@@ -29,7 +29,7 @@ export default function ReviewCardRating(props: ReviewCardRatingProps) {
                     }
 
                     return (
-                        <div className={`review-card__rating-circle ${ratingColour}`}></div>
+                        <div key={idx} className={`review-card__rating-circle ${ratingColour}`}></div>
                     )
                 })}
             </div>

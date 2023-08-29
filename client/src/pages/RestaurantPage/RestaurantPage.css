@@ -222,7 +222,7 @@
     height: 2.4rem;
     margin-bottom: 0.8rem;
     display: flex;
-    align-items: flex-start;
+    align-items: center;
     justify-content: space-between;
 }
 
@@ -259,6 +259,3 @@
 .create-review-btn:hover {
     opacity: 80%;
 }
-
-
-

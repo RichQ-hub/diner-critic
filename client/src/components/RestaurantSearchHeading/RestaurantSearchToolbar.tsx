@@ -1,9 +1,10 @@
+import "./RestaurantSearchToolbar.css";
+
 import { Link, useSearchParams } from "react-router-dom";
 import React, { useContext, useState } from "react";
 import { RestaurantsListContext } from "../../context/RestaurantsListContextProvider";
 import RestaurantsService from "../../services/RestaurantsService";
-
-import "./RestaurantSearchToolbar.css";
+import SortButton from "../SortButton/SortButton";
 
 export default function RestaurantSearchToolbar() {
     const [searchParams, setSearchParams] = useSearchParams();

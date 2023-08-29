@@ -8,7 +8,6 @@ interface PriceRangeDropdownProps {
 }
 
 export default function PriceRangeDropdown(props: PriceRangeDropdownProps) {
-
     const { 
         handleChangePriceRange,
         handleDropdownOpen

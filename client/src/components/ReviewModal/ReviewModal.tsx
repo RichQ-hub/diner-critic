@@ -16,7 +16,6 @@ const TEXTAREA_STYLE_CLASSNAME = 'review-modal-textarea review-input--bg';
 interface ReviewModalProps {
     restaurantId: string;
     handleToggleModal: (bool: boolean) => void;
-    // handleAddReview: (newReview: ReviewState) => void;
 }
 
 export default function ReviewModal(props: ReviewModalProps) {

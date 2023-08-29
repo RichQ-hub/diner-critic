@@ -83,7 +83,6 @@
 .review-card__rating-circles-wrapper {
     margin-top: 0.8rem;
     display: flex;
-    /* justify-content: space-evenly; */
     gap: 6px;
 }
 
@@ -124,5 +123,5 @@
 }
 
 .rating--none {
-    background-color: rgba(183, 183, 183, 0.727);
+    background-color: var(--rating-none);
 }

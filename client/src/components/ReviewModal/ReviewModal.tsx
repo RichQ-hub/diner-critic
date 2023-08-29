@@ -1,23 +1,52 @@
-import { useState } from 'react';
-import FormItemText from '../FormItemText/FormItemText';
 import './ReviewModal.css';
+import FormItemText from '../FormItemText/FormItemText';
 import ReactDOM from 'react-dom';
 import { useFormInputText } from '../../hooks/useFormInputText';
 import FormItemTextarea from '../FormItemTextarea/FormItemTextarea';
+import RatingInput from '../RatingInput/RatingInput';
+import { useFormInputRating } from '../../hooks/useFormInputRating';
+import { ReviewState } from '../../types/types';
+import RestaurantsService from "../../services/RestaurantsService";
+import { useNavigate } from 'react-router-dom';
 
 const MODAL_STYLE_CLASSNAME = 'review-modal-input';
 const TEXT_STYLE_CLASSNAME = 'review-modal-text review-input--bg';
 const TEXTAREA_STYLE_CLASSNAME = 'review-modal-textarea review-input--bg';
 
 interface ReviewModalProps {
+    restaurantId: string;
     handleToggleModal: (bool: boolean) => void;
+    // handleAddReview: (newReview: ReviewState) => void;
 }
 
 export default function ReviewModal(props: ReviewModalProps) {
-    const { handleToggleModal } = props;
+    const { restaurantId, handleToggleModal } = props;
+
+    const navigate = useNavigate();
 
     const title = useFormInputText();
     const reviewContent = useFormInputText();
+    const overallRating = useFormInputRating();
+    const foodRating = useFormInputRating();
+    const serviceRating = useFormInputRating();
+    const atmosphereRating = useFormInputRating();
+
+    async function handleSubmit() {
+        await RestaurantsService.createReview(restaurantId, {
+            title: title.value,
+            content: reviewContent.value,
+            rating_overall: overallRating.value,
+            rating_food: foodRating.value,
+            rating_service: serviceRating.value, 
+            rating_atmosphere: atmosphereRating.value,
+        })
+
+        // Close the modal.
+        handleToggleModal(false);
+
+        // This refreshes the page so that we fetch the reviews again.
+        navigate(0);
+    }
 
     return ReactDOM.createPortal(
         <div className='review-modal-bg' onClick={() => handleToggleModal(false)}>
@@ -39,6 +68,8 @@ export default function ReviewModal(props: ReviewModalProps) {
 
                     {/* Form Section. */}
                     <form className="review-modal__form">
+
+                        {/* Text form inputs. */}
                         <div className="review-modal-inputs">
                             <FormItemText 
                                 title='Title'
@@ -53,10 +84,51 @@ export default function ReviewModal(props: ReviewModalProps) {
                                 onChange={reviewContent.handleChange}
                             />
                         </div>
-                        <div className="review-modal-ratings">
 
+                        {/* Rating form inputs. */}
+                        <div className="review-modal-ratings">
+                            <RatingInput 
+                                title='Overall Rating'
+                                pageStyle={MODAL_STYLE_CLASSNAME}
+                                type='star'
+                                maxRating={5}
+                                selectedRating={overallRating.value}
+                                handleChangeRating={overallRating.handleChangeRating}
+                            />
+
+                            <RatingInput 
+                                title='Food Rating'
+                                pageStyle={MODAL_STYLE_CLASSNAME}
+                                type='circle'
+                                maxRating={5}
+                                selectedRating={foodRating.value}
+                                handleChangeRating={foodRating.handleChangeRating}
+                            />
+
+                            <RatingInput 
+                                title='Service Rating'
+                                pageStyle={MODAL_STYLE_CLASSNAME}
+                                type='circle'
+                                maxRating={5}
+                                selectedRating={serviceRating.value}
+                                handleChangeRating={serviceRating.handleChangeRating}
+                            />
+
+                            <RatingInput 
+                                title='Atmosphere Rating'
+                                pageStyle={MODAL_STYLE_CLASSNAME}
+                                type='circle'
+                                maxRating={5}
+                                selectedRating={atmosphereRating.value}
+                                handleChangeRating={atmosphereRating.handleChangeRating}
+                            />
                         </div>
                     </form>
+
+                    {/* Submit button */}
+                    <button className='review-modal-submit-btn' type='button' onClick={handleSubmit}>
+                        Submit
+                    </button>
                 </div>
             </div>
         </div>, document.getElementById("portal")!

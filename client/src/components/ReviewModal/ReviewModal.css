@@ -101,6 +101,7 @@
 /* Text Input Section. */
 
 .review-modal__form {
+    padding: 0.5rem 0;
     display: grid;
     grid-template-columns: 60% 1fr;
     height: 100%;
@@ -108,7 +109,6 @@
 
 .review-modal-inputs {
     padding: 0 1.2rem;
-    margin: 0.5rem 0;
     display: flex;
     flex-direction: column;
     gap: 1.8rem;
@@ -125,7 +125,7 @@
     margin-bottom: 0.4rem;
 }
 
-.review-modal-input:last-child {
+.review-modal-inputs .review-modal-input:last-child {
     display: flex;
     flex-direction: column;
     height: 100%;
@@ -148,6 +148,7 @@
 /* Text area section. */
 
 .review-modal-textarea {
+    /* Flex 1 makes it so this flex item fills the remaining space in the parents height. */
     flex: 1;
     resize: none;
     overflow-y: scroll;
@@ -168,3 +169,38 @@
 
 /* RATING INPUT SECTION ----------------------------- */
 
+.review-modal-ratings {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 3rem;
+}
+
+.review-modal-ratings .review-modal-input {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* SUBMIT BUTTON ---------------------- */
+
+.review-modal-submit-btn {
+    min-height: 2rem;
+    min-width: 6rem;
+    cursor: pointer;
+    background: none;
+    border: none;
+    border-radius: 0.3125rem;
+    background: var(--color-orange);
+    align-self: flex-end;
+
+    color: #000;
+    font-family: Rajdhani;
+    font-size: 1.2rem;
+    font-weight: 600;
+}
+
+.review-modal-submit-btn:hover {
+    opacity: 70%;
+}

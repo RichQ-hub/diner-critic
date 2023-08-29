@@ -99,7 +99,6 @@ export default function RestaurantPage() {
 
                     {/* Restaurant Image. */}
                     <div className="rest-summary__img-wrapper">
-                        {/* <img src={imgBorder} className="rest-summary__img-border" /> */}
                         <img src={restaurantImgRef} className='rest-summary__img' />
                     </div>
 
@@ -167,7 +166,13 @@ export default function RestaurantPage() {
             </div>
 
             {/* Modal Section. */}
-            {isOpenModal && <ReviewModal handleToggleModal={handleToggleModal} />}
+            {
+                isOpenModal && 
+                <ReviewModal 
+                    restaurantId={restaurantId!}
+                    handleToggleModal={handleToggleModal} 
+                />
+            }
         </main>
     )
 }

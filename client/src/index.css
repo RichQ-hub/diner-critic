@@ -10,6 +10,7 @@
     --rating-three: #ffd900;
     --rating-four: #95cb01;
     --rating-five: #03a745;
+    --rating-none: rgba(183, 183, 183, 0.727);
 }
 
 * {

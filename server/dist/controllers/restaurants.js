@@ -79,7 +79,8 @@ function getRestaurantReviews(req, res) {
                     rev.created_at
             FROM    Restaurants res
                     JOIN Reviews rev on res.id = rev.restaurant
-            WHERE   res.id = $1;
+            WHERE   res.id = $1
+            ORDER BY rev.created_at DESC;
         `, [restaurantId]);
             res.json({
                 reviews: allReviews.rows

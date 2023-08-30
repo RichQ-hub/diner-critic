@@ -39,7 +39,7 @@ export default function CreateRestaurantPage() {
         formData.append("location", location.value);
         formData.append("price_range", priceRange.toString());
         formData.append("description_short", shortDesc.value);
-        formData.append("desacription_long", longDesc.value);
+        formData.append("description_long", longDesc.value);
 
         await RestaurantsService.createRestaurant(formData);
 

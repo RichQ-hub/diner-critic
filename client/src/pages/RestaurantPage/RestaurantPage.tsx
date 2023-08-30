@@ -147,6 +147,7 @@ export default function RestaurantPage() {
 
                         {/* Sort Button. */}
                         <SortButton 
+                            styleClassname='sort-btn-reviews'
                             options={sortOptions}
                             selectedSortOption={sortOption}
                             handleChangeSortOption={handleChangeSortOption}

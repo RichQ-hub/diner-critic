@@ -1,4 +1,4 @@
-.sort-btn {
+.sort-btn-reviews {
     position: relative;
     cursor: pointer;
     padding: 0 1rem;
@@ -10,7 +10,7 @@
     align-items: center;
 }
 
-.sort-btn p, .sort-option__item {
+.sort-btn-reviews p, .sort-option__item {
     color: #FFF;
     text-align: center;
     font-family: Rajdhani;

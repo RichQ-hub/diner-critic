@@ -6,6 +6,8 @@ import RestaurantPage from "./pages/RestaurantPage";
 import UpdateRestaurantPage from "./pages/UpdateRestaurantPage/UpdateRestaurantPage";
 import NavbarLayout from "./layouts/NavbarLayout";
 import CreateRestaurantPage from "./pages/CreateRestaurantPage";
+import LoginPage from "./pages/LoginPage/LoginPage";
+import RegisterPage from "./pages/RegisterPage/RegisterPage";
 
 /**
  * Utilising React Router v6.14.
@@ -57,6 +59,23 @@ export default function Routes() {
                             element: <UpdateRestaurantPage />,
                         }
                     ]
+                }
+            ],
+        },
+        {
+            path: '/auth',
+            children: [
+                {
+                    index: true,
+                    element: <Navigate to='login' />
+                },
+                {
+                    path: 'login',
+                    element: <LoginPage />
+                },
+                {
+                    path: 'register',
+                    element: <RegisterPage />
                 }
             ],
         },

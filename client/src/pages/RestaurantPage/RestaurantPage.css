@@ -32,9 +32,7 @@
 }
 
 .rest-summary__name {
-    font-family: Rajdhani;
     font-size: 3rem;
-    font-weight: 700;
     color: var(--color-orange);
     margin-bottom: 0.6rem;
 }
@@ -71,7 +69,6 @@
 }
 
 .rest-summary__num-ratings p {
-    color: white;
     font-family: Roboto;
     font-size: 1.1rem;
     font-style: italic;
@@ -94,13 +91,10 @@
 
     color: black;
     text-align: center;
-    font-family: Rajdhani;
     font-size: 1.1rem;
-    font-weight: 700;
 }
 
 .rest-summary__location p {
-    color: white;
     font-family: Roboto;
     font-size: 1rem;
     font-weight: 400;
@@ -116,14 +110,11 @@
 
     color: black;
     text-align: center;
-    font-family: Rajdhani;
     font-size: 1.1rem;
-    font-weight: 700;
 }
 
 /* Subject to change */
 .rest-summary__price-range p {
-    color: white;
     font-family: Roboto;
     font-size: 1rem;
     font-weight: 400;
@@ -162,16 +153,11 @@
 }
 
 .rest-summary__avg-rating h3 {
-    color: white;
     text-align: center;
-    font-family: Rajdhani;
     font-size: 1.25rem;
-    font-weight: 700;
 }
 
 .rest-summary__avg-rating p {
-    color: white;
-    font-family: Rajdhani;
     text-align: center;
     font-size: 1.25rem;
     font-weight: 400;
@@ -188,7 +174,6 @@
     color: #B5E9FF;
     font-family: Roboto;
     font-size: 1.2rem;
-    font-weight: 700;
     line-height: 1.5625rem;
 }
 
@@ -199,7 +184,6 @@
 
 .rest-summary__desc p {
     padding-bottom: 1rem;
-    color: white;
     font-family: Roboto;
     font-size: 0.9rem;
     font-weight: 400;
@@ -227,11 +211,8 @@
 }
 
 .rest-reviews__header h3 {
-    color: white;
     text-align: center;
-    font-family: Rajdhani;
     font-size: 1.8rem;
-    font-weight: 700;
     line-height: 3.2rem;
 }
 
@@ -253,7 +234,6 @@
     font-family: Roboto;
     font-size: 1rem;
     font-style: normal;
-    font-weight: 700;
 }
 
 .create-review-btn:hover {

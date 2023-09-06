@@ -47,9 +47,6 @@
 
 .rest-card__name {
     color: var(--color-orange);
-    font-family: Rajdhani;
-    font-size: 1.5rem;
-    font-weight: 700;
 }
 
 .rest-card__desc {
@@ -100,13 +97,11 @@
 }
 
 .rest-tag__location h3, .rest-tag__price h3 {
-    font-family: Rajdhani;
     font-size: 1rem;
-    font-weight: 700;
 }
 
 .rest-tag__value {
-    color: #FFF;
+    color: white;
     font-family: Roboto;
     font-size: 0.9rem;
     font-weight: 500;

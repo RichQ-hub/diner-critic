@@ -19,6 +19,13 @@
     box-sizing: border-box;
 }
 
+body {
+    /* The default font family is Rajdhani. */
+    font-family: Rajdhani, sans-serif;
+    font-weight: 700;
+    color: white;
+}
+
 a {
     text-decoration: none;
 }

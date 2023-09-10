@@ -64,6 +64,7 @@ export default function Routes() {
         },
         {
             path: '/auth',
+            element: <NavbarLayout />,
             children: [
                 {
                     index: true,

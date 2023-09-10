@@ -76,7 +76,7 @@ export default function Navbar() {
                 })}
             </div>
             {/* Login Button */}
-            <Link to="login" className="nav__login">
+            <Link to="/auth/login" className="nav__login">
                 <p>Login</p>
             </Link>
         </nav>

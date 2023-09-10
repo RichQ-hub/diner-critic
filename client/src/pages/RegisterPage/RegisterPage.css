@@ -1,0 +1,18 @@
+/* 
+Note: This page shares styles with LoginPage.css as they use the same
+styles for the input.
+*/
+
+.rest-register-page {
+    min-height: 100vh;
+    background-image: url(../../assets/images/resto-page-bg.png);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    display: flex;
+    justify-content: center;
+
+    padding-top: 160px;
+    padding-bottom: 100px;
+}

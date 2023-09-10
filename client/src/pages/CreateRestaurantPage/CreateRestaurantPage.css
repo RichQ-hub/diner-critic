@@ -42,10 +42,6 @@
     outline: 1px solid white;
 }
 
-.input--bg:focus-visible {
-    outline: none;
-}
-
 .input--bg:focus, .input--bg.dropdown--open {
     outline: 2px solid white;
 }

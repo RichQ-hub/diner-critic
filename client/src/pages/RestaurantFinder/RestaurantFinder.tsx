@@ -1,6 +1,5 @@
 import { useContext, useEffect, useState } from "react"
 import { RestaurantsListContext } from "../../context/RestaurantsListContextProvider"
-import { restaurantsData } from "../../data/restaurantsData";
 import RestaurantsService from "../../services/RestaurantsService";
 
 import './RestaurantFinder.css';

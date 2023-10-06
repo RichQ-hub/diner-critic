@@ -15,3 +15,20 @@ export const RestaurantsAPI = axios.create({
 });
 
 // Could add interceptor so that each requests has a token stored in its header.
+
+/**
+ * Axios Interceptor:
+ * 
+ */
+
+RestaurantsAPI.interceptors.request.use((req) => {
+    const token = localStorage.getItem('token');
+
+    // If the token exists in localstorage, we add it as a header in the request to send 
+    // to the backend.
+    if (token) {
+        req.headers['token'] = token;
+    }
+
+    return req;
+});
